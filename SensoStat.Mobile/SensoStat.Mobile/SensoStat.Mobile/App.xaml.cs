@@ -1,18 +1,63 @@
-﻿using SensoStat.Mobile.Views;
+﻿using Prism;
+using Prism.Ioc;
+using SensoStat.Mobile.Commons;
+using SensoStat.Mobile.Views;
+using Prism.Navigation;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using SensoStat.Mobile.ViewModels;
 
 namespace SensoStat.Mobile
 {
-    public partial class App : Application
+    public partial class App
     {
-        public App()
+        public App(IPlatformInitializer initializer):base(initializer)
+        {
+        }
+
+        protected override async void OnInitialized()
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            await NavigationService.NavigateAsync($"{Constants.NavigationPage}/{Constants.MainPage}");
         }
+
+        public void RegisterViews(IContainerRegistry containerRegistry)
+        {
+            containerRegistry.RegisterForNavigation<NavigationPage>(Constants.NavigationPage);
+            containerRegistry.RegisterForNavigation<MainPage, MainViewModel>(Constants.MainPage);
+        }
+
+        protected override void RegisterTypes(IContainerRegistry containerRegistry)
+        {
+            RegisterHelpers(containerRegistry);
+            RegisterServices(containerRegistry);
+            RegisterRepositories(containerRegistry);
+            RegisterViews(containerRegistry);
+        }
+
+
+
+        private void RegisterServices(IContainerRegistry containerRegistry)
+        {
+        }
+
+
+
+        private void RegisterHelpers(IContainerRegistry containerRegistry)
+        {
+
+
+
+        }
+
+
+
+        private void RegisterRepositories(IContainerRegistry containerRegistry)
+        {
+        }
+
 
         protected override void OnStart()
         {
