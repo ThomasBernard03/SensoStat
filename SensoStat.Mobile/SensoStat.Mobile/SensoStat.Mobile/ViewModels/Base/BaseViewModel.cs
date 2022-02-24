@@ -7,10 +7,11 @@ namespace SensoStat.Mobile.ViewModels.Base
 {
     public class BaseViewModel : BindableBase, INavigationAware, IPageLifecycleAware
     {
-        private readonly INavigationService _navigationService;
+        public INavigationService NavigationService;
+
         public BaseViewModel(INavigationService navigationService)
         {
-            _navigationService = navigationService;
+            NavigationService = navigationService;
         }
 
         public void OnAppearing()

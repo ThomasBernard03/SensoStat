@@ -18,6 +18,7 @@
 
         <StackLayout VerticalOptions="EndAndExpand">
             <Button
+                Command="{Binding StartSurveyCommand}"
                 BackgroundColor="{StaticResource Orange}"
                 Text="Commencer la séance"
                 TextColor="{StaticResource White}"
