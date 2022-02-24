@@ -9,7 +9,7 @@ namespace SensoStat.Mobile.Services
 {
     public class HttpService : IHttpService
     {
-        public async Task<T> SendHttpRequest<T>(string url, HttpMethod httpMethod, object? body = null, string? bearer = null)
+        public async Task<T> SendHttpRequest<T>(string url, HttpMethod httpMethod, object body = null, string bearer = null)
         {
             try
             {
