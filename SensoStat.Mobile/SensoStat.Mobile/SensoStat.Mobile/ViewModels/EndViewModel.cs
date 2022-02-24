@@ -8,6 +8,7 @@ namespace SensoStat.Mobile.ViewModels
     {
         public EndViewModel(INavigationService navigationService) : base(navigationService)
         {
+            // NavigationService.NavigateAsync("/"); // vide la stack
         }
     }
 }

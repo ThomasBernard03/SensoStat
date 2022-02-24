@@ -7,8 +7,6 @@ using SensoStat.Mobile.Helpers.Interfaces;
 
 namespace SensoStat.Mobile.Helpers
 {
-    public class DataTransferHelper
-    {
         public class DataTransferHelper : IDataTransferHelper
         {
             private HttpClient _httpClient;
@@ -59,6 +57,5 @@ namespace SensoStat.Mobile.Helpers
             }
 
         }
-    }
 }
 
