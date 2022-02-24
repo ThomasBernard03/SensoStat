@@ -9,6 +9,7 @@ namespace SensoStat.Mobile.Commons
         #region Pages Names
         public const string MainPage = "MainPage";
         public const string NavigationPage = "NavigationPage";
+        public const string StartPage = "StartPage";
 
 
         #endregion

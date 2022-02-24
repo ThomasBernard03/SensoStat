@@ -20,13 +20,15 @@ namespace SensoStat.Mobile
         {
             InitializeComponent();
 
-            await NavigationService.NavigateAsync($"{Constants.NavigationPage}/{Constants.MainPage}");
+            await NavigationService.NavigateAsync($"{Constants.StartPage}");
         }
 
         public void RegisterViews(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterForNavigation<NavigationPage>(Constants.NavigationPage);
             containerRegistry.RegisterForNavigation<MainPage, MainViewModel>(Constants.MainPage);
+            containerRegistry.RegisterForNavigation<StartPage, StartViewModel>(Constants.StartPage);
+
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
