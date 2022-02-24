@@ -31,6 +31,8 @@ namespace SensoStat.Mobile
             containerRegistry.RegisterForNavigation<InstructionPage, InstructionViewModel>(Constants.InstructionPage);
             containerRegistry.RegisterForNavigation<AnswerPage, AnswerViewModel>(Constants.AnswerPage);
             containerRegistry.RegisterForNavigation<ConfirmAnswerPage, ConfirmAnswerViewModel>(Constants.ConfirmAnswerPage);
+            containerRegistry.RegisterForNavigation<EndPage, EndViewModel>(Constants.EndPage);
+
 
 
         }
