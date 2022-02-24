@@ -10,12 +10,12 @@ namespace SensoStat.Mobile.ViewModels
     {
         public StartViewModel(INavigationService navigationService) : base(navigationService)
         {
-            StartSurveyCommand = new DelegateCommand(async () => await StartSurvey());
+            StartSurveyCommand = new DelegateCommand(async () => await OnStartSurvey());
         }
 
 
         public DelegateCommand StartSurveyCommand { get; set; }
-        private async Task StartSurvey()
+        private async Task OnStartSurvey()
         {
             await NavigationService.NavigateAsync(Commons.Constants.InstructionPage);
         }
