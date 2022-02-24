@@ -29,6 +29,10 @@ namespace SensoStat.Mobile
 
             containerRegistry.RegisterForNavigation<StartPage, StartViewModel>(Constants.StartPage);
             containerRegistry.RegisterForNavigation<InstructionPage, InstructionViewModel>(Constants.InstructionPage);
+            containerRegistry.RegisterForNavigation<AnswerPage, AnswerViewModel>(Constants.AnswerPage);
+            containerRegistry.RegisterForNavigation<ConfirmAnswerPage, ConfirmAnswerViewModel>(Constants.ConfirmAnswerPage);
+
+
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
