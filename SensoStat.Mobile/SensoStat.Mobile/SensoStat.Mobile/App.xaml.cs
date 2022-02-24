@@ -26,7 +26,6 @@ namespace SensoStat.Mobile
         public void RegisterViews(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterForNavigation<NavigationPage>(Constants.NavigationPage);
-            containerRegistry.RegisterForNavigation<MainPage, MainViewModel>(Constants.MainPage);
             containerRegistry.RegisterForNavigation<StartPage, StartViewModel>(Constants.StartPage);
             containerRegistry.RegisterForNavigation<InstructionPage, InstructionViewModel>(Constants.InstructionPage);
         }
