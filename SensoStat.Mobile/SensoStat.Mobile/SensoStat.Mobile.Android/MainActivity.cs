@@ -5,14 +5,18 @@ using Android.Runtime;
 using Android.OS;
 using Prism;
 using Prism.Ioc;
+using SensoStat.Mobile.Services.Interfaces;
+using SensoStat.Mobile.Droid.Services;
 
 namespace SensoStat.Mobile.Droid
 {
     [Activity(Label = "SensoStat.Mobile", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.UiMode | ConfigChanges.ScreenLayout | ConfigChanges.SmallestScreenSize )]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
+        internal static MainActivity Instance { get; private set; }
         protected override void OnCreate(Bundle savedInstanceState)
         {
+            Instance = this;
             base.OnCreate(savedInstanceState);
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
@@ -24,6 +28,7 @@ namespace SensoStat.Mobile.Droid
         {
             public void RegisterTypes(IContainerRegistry containerRegistry)
             {
+                containerRegistry.RegisterSingleton<IMicrophoneService, MicrophoneService>();
             }
         }
 

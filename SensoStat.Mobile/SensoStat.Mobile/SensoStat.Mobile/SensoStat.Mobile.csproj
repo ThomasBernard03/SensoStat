@@ -17,6 +17,7 @@
     <PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2337" />
     <PackageReference Include="Xamarin.Essentials" Version="1.7.1" />
+    <PackageReference Include="Microsoft.CognitiveServices.Speech" Version="1.20.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -32,5 +33,6 @@
     <None Remove="Services\Interfaces\" />
     <None Remove="Repositories\Interfaces\" />
     <None Remove="Helpers\Interfaces\" />
+    <None Remove="Microsoft.CognitiveServices.Speech" />
   </ItemGroup>
 </Project>
