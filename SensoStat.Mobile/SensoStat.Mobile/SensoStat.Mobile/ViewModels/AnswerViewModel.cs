@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.CognitiveServices.Speech;
 using Microsoft.CognitiveServices.Speech.Audio;
 using Prism.Commands;
+using System.Linq;
 using Prism.Navigation;
 using SensoStat.Mobile.Services.Interfaces;
 using SensoStat.Mobile.ViewModels.Base;
@@ -21,9 +22,7 @@ namespace SensoStat.Mobile.ViewModels
             NextStepCommand = new DelegateCommand(async () => await OnNextStepCommand());
             _microphoneService = microphoneService;
 
-            
-
-            
+            Content = "";
         }
 
 
@@ -40,7 +39,6 @@ namespace SensoStat.Mobile.ViewModels
             IsRecording = true;
             await _speechRecognizer.StartContinuousRecognitionAsync();
             _speechRecognizer.Recognized += _speechRecognizer_Recognized;
-
         }
 
         private async void _speechRecognizer_Recognized(object sender, SpeechRecognitionEventArgs e)
@@ -50,13 +48,7 @@ namespace SensoStat.Mobile.ViewModels
 
         private async Task UpdateText(string content)
         {
-            Content = content;
-
-            if (content == "Stop")
-            {
-                IsRecording = false;
-                await _speechRecognizer.StopContinuousRecognitionAsync();
-            }
+            Content += content;
         }
 
         public DelegateCommand NextStepCommand { get; set; }
