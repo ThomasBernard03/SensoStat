@@ -12,17 +12,13 @@ namespace SensoStat.Mobile.ViewModels
 {
     public class AnswerViewModel : BaseViewModel
     {
-        private readonly IMicrophoneService _microphoneService;
-        private SpeechRecognizer _speechRecognizer;
-        private SpeechConfig _speechConfig;
-        private SourceLanguageConfig _sourceLanguageConfig;
+        private readonly ISpeechService _speechService;
 
-        public AnswerViewModel(INavigationService navigationService, IMicrophoneService microphoneService) : base(navigationService)
+        public AnswerViewModel(INavigationService navigationService, ISpeechService speechService) : base(navigationService)
         {
             NextStepCommand = new DelegateCommand(async () => await OnNextStepCommand());
-            _microphoneService = microphoneService;
 
-            Content = "";
+            _speechService = speechService;
         }
 
 
@@ -30,25 +26,14 @@ namespace SensoStat.Mobile.ViewModels
         {
             base.OnNavigatedTo(parameters);
 
-            var res = await _microphoneService.GetPermissionAsync();
-            _speechConfig = SpeechConfig.FromSubscription(Commons.Constants.AzureKey, Commons.Constants.AzureRegion);
-            _sourceLanguageConfig = SourceLanguageConfig.FromLanguage("fr-FR");
 
-            _speechRecognizer = new SpeechRecognizer(_speechConfig, _sourceLanguageConfig, AudioConfig.FromDefaultMicrophoneInput());
-
+            await _speechService.SpeechToText();
             IsRecording = true;
-            await _speechRecognizer.StartContinuousRecognitionAsync();
-            _speechRecognizer.Recognized += _speechRecognizer_Recognized;
-        }
 
-        private async void _speechRecognizer_Recognized(object sender, SpeechRecognitionEventArgs e)
-        {
-            await UpdateText(e.Result.Text);
-        }
-
-        private async Task UpdateText(string content)
-        {
-            Content += content;
+            _speechService.SpeechRecognizer.Recognized += (object sender, SpeechRecognitionEventArgs e) =>
+                {
+                    Content += e.Result.Text;
+                };
         }
 
         public DelegateCommand NextStepCommand { get; set; }
