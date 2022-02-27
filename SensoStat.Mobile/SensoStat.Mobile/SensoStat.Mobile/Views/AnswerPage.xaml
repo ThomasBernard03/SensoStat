@@ -33,7 +33,7 @@
 
         <ActivityIndicator
             IsRunning="True"
-            IsVisible="{Binding IsRecording}">
+            IsVisible="{Binding IsBusy}">
         </ActivityIndicator>
 
         <StackLayout VerticalOptions="EndAndExpand">
