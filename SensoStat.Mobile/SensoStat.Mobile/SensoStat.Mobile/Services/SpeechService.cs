@@ -11,14 +11,20 @@ namespace SensoStat.Mobile.Services
         private readonly IMicrophoneService _microphoneService;
 
         public SpeechRecognizer SpeechRecognizer { get; set; }
-        public SpeechConfig SpeechConfig { get; set; }
-        public SourceLanguageConfig SourceLanguageConfig { get; set; }
+        public SpeechSynthesizer SpeechSynthesizer { get; set; }
+
+        private SpeechConfig _speechConfig;
+        private SourceLanguageConfig _sourceLanguageConfig;
+        private AudioConfig _audioConfig;
 
         public SpeechService(IMicrophoneService microphoneService)
         {
             _microphoneService = microphoneService;
-            SpeechConfig = SpeechConfig.FromSubscription(Commons.Constants.AzureKey, Commons.Constants.AzureRegion);
-            SourceLanguageConfig = SourceLanguageConfig.FromLanguage("fr-FR");
+            _speechConfig = SpeechConfig.FromSubscription(Commons.Constants.AzureKey, Commons.Constants.AzureRegion);
+            _sourceLanguageConfig = SourceLanguageConfig.FromLanguage("fr-FR");
+            _speechConfig.SpeechSynthesisLanguage = "fr-FR";
+            _speechConfig.SpeechSynthesisVoiceName = "fr-BE-CharlineNeural";
+            _audioConfig = AudioConfig.FromDefaultSpeakerOutput();
 
         }
 
@@ -30,7 +36,7 @@ namespace SensoStat.Mobile.Services
                 if (!permissionsAllowed)
                     new Exception("Can't get microphone access");
 
-                SpeechRecognizer = new SpeechRecognizer(SpeechConfig, SourceLanguageConfig, AudioConfig.FromDefaultMicrophoneInput());
+                SpeechRecognizer = new SpeechRecognizer(_speechConfig, _sourceLanguageConfig, AudioConfig.FromDefaultMicrophoneInput());
 
                 await SpeechRecognizer.StartContinuousRecognitionAsync();
             }
@@ -41,9 +47,11 @@ namespace SensoStat.Mobile.Services
 
         }
 
-        public Task TextToSpeech(string content)
+        public async Task TextToSpeech(string content)
         {
-            throw new NotImplementedException();
+            SpeechSynthesizer = new SpeechSynthesizer(_speechConfig, _audioConfig);
+
+            await SpeechSynthesizer.SpeakTextAsync(content);
         }
     }
 }

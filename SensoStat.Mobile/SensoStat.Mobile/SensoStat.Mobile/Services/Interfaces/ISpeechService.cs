@@ -7,8 +7,7 @@ namespace SensoStat.Mobile.Services.Interfaces
     public interface ISpeechService
     {
         SpeechRecognizer SpeechRecognizer { get; set; }
-        SpeechConfig SpeechConfig { get; set; }
-        SourceLanguageConfig SourceLanguageConfig { get; set; }
+        SpeechSynthesizer SpeechSynthesizer { get; set; }
 
         /// <summary>
         /// Method which use azure cognitive service

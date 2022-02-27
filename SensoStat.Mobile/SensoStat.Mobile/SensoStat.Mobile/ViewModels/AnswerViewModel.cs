@@ -28,7 +28,7 @@ namespace SensoStat.Mobile.ViewModels
 
 
             await _speechService.SpeechToText();
-            IsRecording = true;
+            IsBusy = true;
 
             _speechService.SpeechRecognizer.Recognized += (object sender, SpeechRecognitionEventArgs e) =>
                 {
@@ -40,13 +40,6 @@ namespace SensoStat.Mobile.ViewModels
         private async Task OnNextStepCommand()
         {
             await NavigationService.NavigateAsync(Commons.Constants.ConfirmAnswerPage);
-        }
-
-        private bool _isRecording;
-        public bool IsRecording
-        {
-            get { return _isRecording; }
-            set { SetProperty(ref _isRecording, value); }
         }
 
         private string _content;
