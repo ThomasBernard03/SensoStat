@@ -28,19 +28,19 @@ namespace SensoStat.Mobile.ViewModels
             await _speechService.SpeechToText();
             IsBusy = true;
 
-            _speechService.SpeechRecognizer.Recognized += SpeechRecognizer_Recognized;
-
-        }
-
-        private async void SpeechRecognizer_Recognized(object sender, Microsoft.CognitiveServices.Speech.SpeechRecognitionEventArgs e)
-        {
-            if (e.Result.Text.ToLower().Contains("commencer"))
-                await OnStartSurvey();
+            _speechService.SpeechRecognizer.Recognized += async (object sender, Microsoft.CognitiveServices.Speech.SpeechRecognitionEventArgs e) =>
+            {
+                if (e.Result.Text.ToLower().Contains("commencer"))
+                {
+                    await OnStartSurvey();
+                }
+            };
         }
 
         public DelegateCommand StartSurveyCommand { get; set; }
         private async Task OnStartSurvey()
         {
+            await _speechService.SpeechRecognizer?.StopContinuousRecognitionAsync();
             await NavigationService.NavigateAsync(Commons.Constants.InstructionPage);
         }
     }
