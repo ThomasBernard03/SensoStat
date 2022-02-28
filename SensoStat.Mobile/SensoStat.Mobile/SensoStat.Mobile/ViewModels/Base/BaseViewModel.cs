@@ -9,6 +9,14 @@ namespace SensoStat.Mobile.ViewModels.Base
     {
         public INavigationService NavigationService;
 
+
+        private bool _isBusy;
+        public bool IsBusy
+        {
+            get { return _isBusy; }
+            set { SetProperty(ref _isBusy, value); }
+        }
+
         public BaseViewModel(INavigationService navigationService)
         {
             NavigationService = navigationService;
@@ -22,11 +30,11 @@ namespace SensoStat.Mobile.ViewModels.Base
         {
         }
 
-        public void OnNavigatedFrom(INavigationParameters parameters)
+        public virtual void OnNavigatedFrom(INavigationParameters parameters)
         {
         }
 
-        public void OnNavigatedTo(INavigationParameters parameters)
+        public virtual void OnNavigatedTo(INavigationParameters parameters)
         {
         }
     }

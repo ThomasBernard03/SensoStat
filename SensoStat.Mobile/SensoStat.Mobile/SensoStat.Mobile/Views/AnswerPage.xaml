@@ -24,12 +24,17 @@
                 HasShadow="False"
                 >
                 <Editor
+                    Text="{Binding Content}"
                     HeightRequest="300"
                     BackgroundColor="Transparent">
                 </Editor>
             </Frame>
         </StackLayout>
 
+        <ActivityIndicator
+            IsRunning="True"
+            IsVisible="{Binding IsBusy}">
+        </ActivityIndicator>
 
         <StackLayout VerticalOptions="EndAndExpand">
             <Button

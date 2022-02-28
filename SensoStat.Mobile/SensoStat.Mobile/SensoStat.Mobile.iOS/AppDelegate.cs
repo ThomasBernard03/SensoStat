@@ -5,6 +5,8 @@ using System.Linq;
 using Foundation;
 using Prism;
 using Prism.Ioc;
+using SensoStat.Mobile.iOS.Services;
+using SensoStat.Mobile.Services.Interfaces;
 using UIKit;
 
 namespace SensoStat.Mobile.iOS
@@ -34,6 +36,7 @@ namespace SensoStat.Mobile.iOS
         {
             public void RegisterTypes(IContainerRegistry containerRegistry)
             {
+                containerRegistry.RegisterSingleton<IMicrophoneService, MicrophoneService>();
             }
         }
     }

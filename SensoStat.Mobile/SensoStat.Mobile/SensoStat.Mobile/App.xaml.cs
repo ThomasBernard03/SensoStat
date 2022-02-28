@@ -7,6 +7,8 @@ using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using SensoStat.Mobile.ViewModels;
+using SensoStat.Mobile.Services.Interfaces;
+using SensoStat.Mobile.Services;
 
 namespace SensoStat.Mobile
 {
@@ -49,6 +51,7 @@ namespace SensoStat.Mobile
 
         private void RegisterServices(IContainerRegistry containerRegistry)
         {
+            containerRegistry.RegisterSingleton<ISpeechService, SpeechService>();
         }
 
 
