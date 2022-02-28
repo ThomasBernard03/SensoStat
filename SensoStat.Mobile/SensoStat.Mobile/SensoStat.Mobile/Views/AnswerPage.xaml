@@ -12,7 +12,7 @@
         <StackLayout VerticalOptions="CenterAndExpand">
             <Label
                 HorizontalTextAlignment="Center"
-                Text="C'est à vous !"
+                Text="Enoncer votre réponse puis quand vous avez fini dites suivant pour continuer"
                 FontSize="Subtitle"
                 Margin="20">
             </Label>
@@ -47,7 +47,7 @@
                 Padding="15">
             </Button>
             <Label
-                Text="Enoncez votre réponse"
+                Text="Ou dites 'Suivant'"
                 HorizontalTextAlignment="Center">
             </Label>
         </StackLayout>

@@ -26,19 +26,29 @@ namespace SensoStat.Mobile.ViewModels
         {
             base.OnNavigatedTo(parameters);
 
+            await _speechService.TextToSpeech("Enoncer votre réponse puis quand vous avez fini dites suivant pour continuer");
 
             await _speechService.SpeechToText();
             IsBusy = true;
 
-            _speechService.SpeechRecognizer.Recognized += (object sender, SpeechRecognitionEventArgs e) =>
+            _speechService.SpeechRecognizer.Recognized += async (object sender, SpeechRecognitionEventArgs e) =>
+            {
+                if (e.Result.Text.ToLower().Contains("suivant"))
                 {
-                    Content += e.Result.Text;
-                };
+                    await OnNextStepCommand();
+                }
+                Content += e.Result.Text;
+            };
         }
 
         public DelegateCommand NextStepCommand { get; set; }
         private async Task OnNextStepCommand()
         {
+            await _speechService.SpeechSynthesizer.StopSpeakingAsync();
+            if (IsBusy)
+            {
+                await _speechService.SpeechRecognizer.StopContinuousRecognitionAsync();
+            }
             await NavigationService.NavigateAsync(Commons.Constants.ConfirmAnswerPage);
         }
 
