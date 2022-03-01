@@ -39,7 +39,8 @@ namespace SensoStat.Mobile.ViewModels
         public DelegateCommand NextStepCommand { get; set; }
         private async Task OnNextStepCommand()
         {
-            await NavigationService.NavigateAsync(Commons.Constants.ConfirmAnswerPage);
+            var parameter = new NavigationParameters { { "content", Content } };
+            await NavigationService.NavigateAsync(Commons.Constants.ConfirmAnswerPage, parameter);
         }
 
         private string _content;
