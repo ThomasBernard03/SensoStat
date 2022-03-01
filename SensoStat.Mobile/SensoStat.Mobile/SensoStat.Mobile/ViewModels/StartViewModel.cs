@@ -22,8 +22,7 @@ namespace SensoStat.Mobile.ViewModels
         {
             base.OnNavigatedTo(parameters);
 
-            await _speechService.TextToSpeech("Bienvenue à notre séance de tests.");
-            await _speechService.TextToSpeech("Cliquez sur le bouton, ou dites Commencer.");
+            await _speechService.TextToSpeech("Bienvenue à notre séance de tests. Pour commencer la scéance, cliquez sur le bouton, ou dites Commencer.");
 
             await _speechService.SpeechToText();
             IsBusy = true;
@@ -40,7 +39,11 @@ namespace SensoStat.Mobile.ViewModels
         public DelegateCommand StartSurveyCommand { get; set; }
         private async Task OnStartSurvey()
         {
-            await _speechService.SpeechRecognizer?.StopContinuousRecognitionAsync();
+            await _speechService.SpeechSynthesizer.StopSpeakingAsync();
+            if (IsBusy)
+            {
+                await _speechService.SpeechRecognizer.StopContinuousRecognitionAsync();
+            }
             await NavigationService.NavigateAsync(Commons.Constants.InstructionPage);
         }
     }

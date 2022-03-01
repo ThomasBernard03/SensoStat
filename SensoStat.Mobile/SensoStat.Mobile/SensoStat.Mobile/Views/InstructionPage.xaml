@@ -24,6 +24,10 @@
             </Label>
         </StackLayout>
 
+        <ActivityIndicator
+            IsRunning="True"
+            IsVisible="{Binding IsBusy}">
+        </ActivityIndicator>
 
         <StackLayout VerticalOptions="EndAndExpand">
             <Button
@@ -36,7 +40,7 @@
                 Padding="15">
             </Button>
             <Label
-                Text="Ou dites 'Etape suivante'"
+                Text="Ou dites 'Suivant'"
                 HorizontalTextAlignment="Center">
             </Label>
         </StackLayout>

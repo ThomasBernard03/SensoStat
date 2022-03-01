@@ -16,6 +16,11 @@
             FontSize="Title">
         </Label>
 
+        <ActivityIndicator
+            IsRunning="True"
+            IsVisible="{Binding IsBusy}">
+        </ActivityIndicator>
+
         <StackLayout VerticalOptions="EndAndExpand">
             <Button
                 Command="{Binding StartSurveyCommand}"
@@ -27,7 +32,7 @@
                 Padding="15">
             </Button>
             <Label
-                Text="Ou dites 'Commencer la séance'"
+                Text="Ou dites 'Commencer'"
                 HorizontalTextAlignment="Center">
             </Label>
         </StackLayout>

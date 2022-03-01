@@ -26,12 +26,12 @@
         </StackLayout>
 
         <StackLayout VerticalOptions="CenterAndExpand">
-            <Label
+            <!--<Label
                 HorizontalTextAlignment="Center"
                 Text="C'est à vous !"
                 FontSize="Subtitle"
                 Margin="20">
-            </Label>
+            </Label>-->
             <Frame
                 CornerRadius="15"
                 Padding="0"
@@ -46,6 +46,10 @@
             </Frame>
         </StackLayout>
 
+        <ActivityIndicator
+            IsRunning="True"
+            IsVisible="{Binding IsBusy}">
+        </ActivityIndicator>
 
         <StackLayout VerticalOptions="EndAndExpand">
             <Button
