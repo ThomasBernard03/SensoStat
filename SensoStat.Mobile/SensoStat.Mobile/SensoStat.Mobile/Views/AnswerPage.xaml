@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="SensoStat.Mobile.Views.AnswerPage">
+    <StackLayout
+        Padding="20, 50"
+        HorizontalOptions="FillAndExpand"
+        VerticalOptions="FillAndExpand"
+        BackgroundColor="{StaticResource PaleYellow}">
+
+        <StackLayout VerticalOptions="CenterAndExpand">
+            <Label
+                HorizontalTextAlignment="Center"
+                Text="Enoncer votre réponse puis quand vous avez fini dites suivant pour continuer"
+                FontSize="Subtitle"
+                Margin="20">
+            </Label>
+            <Frame
+                CornerRadius="15"
+                Padding="0"
+                Margin="0"
+                BorderColor="Black"
+                HasShadow="False"
+                >
+                <Editor
+                    Text="{Binding Content}"
+                    HeightRequest="300"
+                    BackgroundColor="Transparent">
+                </Editor>
+            </Frame>
+        </StackLayout>
+
+        <ActivityIndicator
+            IsRunning="True"
+            IsVisible="{Binding IsBusy}">
+        </ActivityIndicator>
+
+        <StackLayout VerticalOptions="EndAndExpand">
+            <Button
+                Command="{Binding NextStepCommand}"
+                BackgroundColor="{StaticResource Orange}"
+                Text="Etape suivante"
+                TextColor="{StaticResource White}"
+                CornerRadius="15"
+                FontAttributes="Bold"
+                Padding="15">
+            </Button>
+            <Label
+                Text="Ou dites 'Suivant'"
+                HorizontalTextAlignment="Center">
+            </Label>
+        </StackLayout>
+    </StackLayout>
+</ContentPage>
+

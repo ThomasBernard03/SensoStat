@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="SensoStat.Mobile.Views.ConfirmAnswerPage">
+    <StackLayout
+        Padding="20, 50"
+        HorizontalOptions="FillAndExpand"
+        VerticalOptions="FillAndExpand"
+        BackgroundColor="{StaticResource PaleYellow}">
+
+        <StackLayout VerticalOptions="EndAndExpand">
+            <Button
+                Command="{Binding BackCommand}"
+                BackgroundColor="{StaticResource Orange}"
+                Text="Reformuler"
+                TextColor="{StaticResource White}"
+                CornerRadius="15"
+                FontAttributes="Bold"
+                Padding="15">
+            </Button>
+            <Label
+                Text="Ou dites 'Reformuler'"
+                HorizontalTextAlignment="Center">
+            </Label>
+        </StackLayout>
+
+        <StackLayout VerticalOptions="CenterAndExpand">
+            <!--<Label
+                HorizontalTextAlignment="Center"
+                Text="C'est à vous !"
+                FontSize="Subtitle"
+                Margin="20">
+            </Label>-->
+            <Frame
+                CornerRadius="15"
+                Padding="0"
+                Margin="0"
+                BorderColor="Black"
+                HasShadow="False"
+                >
+                <Editor
+                    HeightRequest="300"
+                    BackgroundColor="Transparent">
+                </Editor>
+            </Frame>
+        </StackLayout>
+
+        <ActivityIndicator
+            IsRunning="True"
+            IsVisible="{Binding IsBusy}">
+        </ActivityIndicator>
+
+        <StackLayout VerticalOptions="EndAndExpand">
+            <Button
+                Command="{Binding ValidateCommand}"
+                BackgroundColor="{StaticResource Orange}"
+                Text="Valider"
+                TextColor="{StaticResource White}"
+                CornerRadius="15"
+                FontAttributes="Bold"
+                Padding="15">
+            </Button>
+            <Label
+                Text="Ou dites 'Valider'"
+                HorizontalTextAlignment="Center">
+            </Label>
+        </StackLayout>
+    </StackLayout>
+</ContentPage>
+
