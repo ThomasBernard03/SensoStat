@@ -25,7 +25,6 @@ namespace SensoStat.Mobile.Services
             _speechConfig.SpeechSynthesisLanguage = "fr-FR";
             _speechConfig.SpeechSynthesisVoiceName = "fr-BE-CharlineNeural";
             _audioConfig = AudioConfig.FromDefaultSpeakerOutput();
-
         }
 
         public async Task SpeechToText()
@@ -52,6 +51,11 @@ namespace SensoStat.Mobile.Services
             SpeechSynthesizer = new SpeechSynthesizer(_speechConfig, _audioConfig);
 
             await SpeechSynthesizer.SpeakTextAsync(content);
+        }
+
+        public async Task StopTextToSpeech()
+        {
+            await SpeechSynthesizer.StopSpeakingAsync();
         }
     }
 }
