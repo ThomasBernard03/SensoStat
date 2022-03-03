@@ -28,12 +28,8 @@
         <StackLayout VerticalOptions="EndAndExpand">
             <Button
                 Command="{Binding NextStepCommand}"
-                BackgroundColor="{StaticResource Orange}"
-                Text="Etape suivante"
-                TextColor="{StaticResource White}"
-                CornerRadius="15"
-                FontAttributes="Bold"
-                Padding="15">
+                Style="{StaticResource OrangeRoundedButton}"
+                Text="Etape suivante">
             </Button>
             <Label
                 Text="Ou dites 'Etape suivante'"
