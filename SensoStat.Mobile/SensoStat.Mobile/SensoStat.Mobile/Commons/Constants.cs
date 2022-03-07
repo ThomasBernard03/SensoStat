@@ -16,10 +16,10 @@ namespace SensoStat.Mobile.Commons
 
         public const string AzureKey = "f82e0346833749bd907eb00df76c1f12";
         public const string AzureRegion = "francecentral";
+        #endregion
 
-
-
-
+        #region API
+        public const string BaseUrlApi = "https://appsensostatapi.azurewebsites.net/";
         #endregion
     }
 }
