@@ -21,5 +21,7 @@ namespace SensoStat.Mobile.Services.Interfaces
         /// <param name="content">The content which we want to read</param>
         /// <returns></returns>
         Task TextToSpeech(string content);
+
+        Task StopTextToSpeech();
     }
 }

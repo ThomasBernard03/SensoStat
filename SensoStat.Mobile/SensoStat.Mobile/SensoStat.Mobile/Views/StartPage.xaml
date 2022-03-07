@@ -23,13 +23,9 @@
 
         <StackLayout VerticalOptions="EndAndExpand">
             <Button
+                Style="{StaticResource OrangeRoundedButton}"
                 Command="{Binding StartSurveyCommand}"
-                BackgroundColor="{StaticResource Orange}"
-                Text="Commencer la séance"
-                TextColor="{StaticResource White}"
-                CornerRadius="15"
-                FontAttributes="Bold"
-                Padding="15">
+                Text="Commencer la séance">
             </Button>
             <Label
                 Text="Ou dites 'Commencer'"
