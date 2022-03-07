@@ -9,16 +9,16 @@ namespace SensoStat.Mobile.Models
         [PrimaryKey]
         public int Id { get; set; }
 
-        public string? UserId { get; set; }
+        public string UserId { get; set; }
 
-        public User? User { get; set; }
+        public User User { get; set; }
 
         public int ProductId { get; set; }
 
-        public Product? Product { get; set; }
+        public Product Product { get; set; }
 
         public int Position { get; set; }
 
-        public Survey? Survey { get; set; }
+        public Survey Survey { get; set; }
     }
 }

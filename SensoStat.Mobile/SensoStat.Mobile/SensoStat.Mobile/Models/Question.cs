@@ -19,8 +19,8 @@ namespace SensoStat.Mobile.Models
         public int SurveyId { get; set; }
 
         [JsonIgnore]
-        public Survey? Survey { get; set; }
+        public Survey Survey { get; set; }
 
-        public List<Answer>? Answers { get; set; }
+        public List<Answer> Answers { get; set; }
     }
 }

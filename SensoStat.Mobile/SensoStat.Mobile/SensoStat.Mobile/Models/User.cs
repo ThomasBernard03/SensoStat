@@ -8,18 +8,18 @@ namespace SensoStat.Mobile.Models
     public class User
     {
         [PrimaryKey]
-        public string? Id { get; set; }
+        public string Id { get; set; }
 
         public int SurveyId { get; set; }
 
-        public Survey? Survey { get; set; }
+        public Survey Survey { get; set; }
 
-        public string? Code { get; set; }
+        public string Code { get; set; }
 
-        public string? Link { get; set; }
+        public string Link { get; set; }
 
-        public List<Answer>? Answers { get; set; }
+        public List<Answer> Answers { get; set; }
 
-        public List<UserProduct>? UserProducts { get; set; }
+        public List<UserProduct> UserProducts { get; set; }
     }
 }

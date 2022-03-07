@@ -10,12 +10,12 @@ namespace SensoStat.Mobile.Models
         [PrimaryKey]
         public int Id { get; set; }
 
-        public string? Code { get; set; }
+        public string Code { get; set; }
 
         public int SurveyId { get; set; }
 
-        public Survey? Survey { get; set; }
+        public Survey Survey { get; set; }
 
-        public List<UserProduct>? UserProducts { get; set; }
+        public List<UserProduct> UserProducts { get; set; }
     }
 }

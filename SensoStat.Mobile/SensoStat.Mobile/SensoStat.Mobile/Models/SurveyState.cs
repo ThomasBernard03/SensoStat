@@ -11,9 +11,9 @@ namespace SensoStat.Mobile.Models
         [PrimaryKey]
         public int Id { get; set; }
 
-        public string? Libelle { get; set; }
+        public string Libelle { get; set; }
 
         [JsonIgnore]
-        public List<Survey>? Surveys { get; set; }
+        public List<Survey> Surveys { get; set; }
     }
 }
