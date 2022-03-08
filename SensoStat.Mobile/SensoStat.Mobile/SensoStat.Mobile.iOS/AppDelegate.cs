@@ -37,6 +37,7 @@ namespace SensoStat.Mobile.iOS
             public void RegisterTypes(IContainerRegistry containerRegistry)
             {
                 containerRegistry.RegisterSingleton<IMicrophoneService, MicrophoneService>();
+                containerRegistry.RegisterSingleton<ISurveyService, SurveyService>();
             }
         }
     }

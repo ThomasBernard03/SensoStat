@@ -29,6 +29,7 @@ namespace SensoStat.Mobile.Droid
             public void RegisterTypes(IContainerRegistry containerRegistry)
             {
                 containerRegistry.RegisterSingleton<IMicrophoneService, MicrophoneService>();
+                containerRegistry.RegisterSingleton<ISurveyService, SurveyService>();
             }
         }
 
