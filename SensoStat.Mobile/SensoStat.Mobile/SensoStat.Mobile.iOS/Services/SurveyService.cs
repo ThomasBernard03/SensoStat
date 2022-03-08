@@ -7,7 +7,7 @@ using SensoStat.Mobile.Services.Interfaces;
 
 namespace SensoStat.Mobile.iOS.Services
 {
-	public class SurveyService
+	public class SurveyService : ISurveyService
 	{
         private readonly IHttpService _httpService;
 
@@ -16,7 +16,7 @@ namespace SensoStat.Mobile.iOS.Services
             _httpService = httpService;
         }
 
-        public async Task<Survey> GetSurvey(int surveyId, string token = "")
+        public async Task<Survey> GetSurveyById(int surveyId, string token = "")
         {
             var survey = await _httpService.SendHttpRequest<Survey>($"{Constants.BaseUrlApi}survey?surveyId={surveyId}", HttpMethod.Get, bearer: token);
 
