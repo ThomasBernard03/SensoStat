@@ -52,6 +52,8 @@ namespace SensoStat.Mobile
         private void RegisterServices(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterSingleton<ISpeechService, SpeechService>();
+            containerRegistry.RegisterSingleton<ISurveyService, SurveyService>();
+
         }
 
 
