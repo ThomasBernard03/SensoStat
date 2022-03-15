@@ -16,6 +16,16 @@
             FontSize="Title">
         </Label>
 
+        <Entry
+            Placeholder="Entrez votre lien"
+            Text="{Binding UserLink}">
+        </Entry>
+        <Button
+            Style="{StaticResource TextOrangeRoundedButton}"
+            Command="{Binding CheckUserLinkCommand}"
+            Text="Vérifier">
+        </Button>
+
         <ActivityIndicator
             IsRunning="True"
             IsVisible="{Binding IsBusy}">
@@ -23,6 +33,7 @@
 
         <StackLayout VerticalOptions="EndAndExpand">
             <Button
+                IsEnabled="{Binding IsLinkValid}"
                 Style="{StaticResource OrangeRoundedButton}"
                 Command="{Binding StartSurveyCommand}"
                 Text="Commencer la séance">
