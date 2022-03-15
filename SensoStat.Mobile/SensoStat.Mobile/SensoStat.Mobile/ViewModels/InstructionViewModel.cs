@@ -5,6 +5,7 @@ using Prism.Commands;
 using Prism.Navigation;
 using SensoStat.Mobile.Services.Interfaces;
 using SensoStat.Mobile.ViewModels.Base;
+using Xamarin.Essentials;
 
 namespace SensoStat.Mobile.ViewModels
 {
@@ -48,7 +49,9 @@ namespace SensoStat.Mobile.ViewModels
             {
                 await _speechService.SpeechRecognizer.StopContinuousRecognitionAsync();
             }
-            await NavigationService.NavigateAsync(Commons.Constants.AnswerPage);
+            ;
+            MainThread.BeginInvokeOnMainThread(async () => { await NavigationService.NavigateAsync(Commons.Constants.AnswerPage); });
+
         }
     }
 }
