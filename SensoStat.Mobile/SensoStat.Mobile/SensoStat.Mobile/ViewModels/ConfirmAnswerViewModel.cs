@@ -11,25 +11,47 @@ namespace SensoStat.Mobile.ViewModels
 {
     public class ConfirmAnswerViewModel : BaseViewModel
     {
-        private readonly ISpeechService _speechService;
-        public string UserAnswer { get; set; }
+        #region CTOR
         public ConfirmAnswerViewModel(INavigationService navigationService, ISpeechService speechService, ISurveyService surveyService) : base(navigationService, surveyService)
         {
             BackCommand = new DelegateCommand(async () => await OnBackCommand());
             ValidateCommand = new DelegateCommand(async () => await OnValidateCommand());
             _speechService = speechService;
         }
+        #endregion
 
+        #region Lifecycle
         public async override void OnNavigatedTo(INavigationParameters parameters)
         {
             base.OnNavigatedTo(parameters);
 
+            await _speechService.TextToSpeech($"Relisez votre réponse. Pour la reformuler dites reformuler. Pour passer à l'étape suivante dites suivant");
+
+
             Content = parameters.GetValue<string>("content");
         }
+        #endregion
+
+        #region Privates
+        private readonly ISpeechService _speechService;
+        #endregion
+
+        #region Publics
+
+        private string _content;
+        public string Content
+        {
+            get { return _content; }
+            set { SetProperty(ref _content, value); }
+        }
+
+        #endregion
+
+        #region Commands
 
         public DelegateCommand BackCommand { get; set; }
         private async Task OnBackCommand()
-        { 
+        {
             await _speechService.SpeechRecognizer.StopContinuousRecognitionAsync();
             await NavigationService.GoBackAsync();
         }
@@ -44,13 +66,19 @@ namespace SensoStat.Mobile.ViewModels
             }
             await NavigationService.NavigateAsync(Commons.Constants.EndPage);
         }
+        #endregion
 
-        private string _content;
-        public string Content
-        {
-            get { return _content; }
-            set { SetProperty(ref _content, value); }
-        }
+        #region Methods
+
+        #endregion
+
+
+
+
+
+
+
+
     }
 }
 

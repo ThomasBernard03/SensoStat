@@ -18,6 +18,8 @@ namespace SensoStat.Mobile.ViewModels
             StartSurveyCommand = new DelegateCommand(async () => await OnStartSurvey());
             CheckUserLinkCommand = new DelegateCommand(async () => await OnCheckUserLink());
 
+            UserLink = "https://sensostatvue.firebaseapp.com?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IlMwMDE1NCIsInByaW1hcnlzaWQiOiI1NCIsImp0aSI6ImZmMjc4Yzg1LTQ4YzYtNDg1ZC04YWM5LTQ4MmYyNGZjOTFkYiIsIm5iZiI6MTY0NzQzMzgzMSwiZXhwIjoxNjQ4MDM4NjMxLCJpYXQiOjE2NDc0MzM4MzEsImlzcyI6Imh0dHBzOi8vbG9jYWxob3N0OjcwMTkiLCJhdWQiOiJTZW5zb1N0YXRXZWIuQXBpIn0.OMzwO8E4W-d2abdeHlpjkMvYTA_mRQF9KldZ_ySQDdg";
+
             _speechService = speechService;
         }
         #endregion
@@ -27,12 +29,14 @@ namespace SensoStat.Mobile.ViewModels
         {
             base.OnNavigatedTo(parameters);
 
+
             await _speechService.TextToSpeech("Bienvenue à notre séance de tests. Pour commencer la scéance, cliquez sur le bouton, ou dites Commencer.");
 
             await _speechService.SpeechToText();
+            _speechService.SpeechRecognizer.Recognized += RecognizeStartSurvey;
+
             IsBusy = true;
 
-            _speechService.SpeechRecognizer.Recognized += RecognizeStartSurvey;
         }
 
         #endregion
@@ -79,7 +83,9 @@ namespace SensoStat.Mobile.ViewModels
                 return;
             }
 
-            _speechService.SpeechRecognizer.Recognized -= RecognizeStartSurvey;
+            if (_speechService.SpeechRecognizer != null)
+                _speechService.SpeechRecognizer.Recognized -= RecognizeStartSurvey;
+
             await _speechService.StopTextToSpeech();
             await NextPage();
         }

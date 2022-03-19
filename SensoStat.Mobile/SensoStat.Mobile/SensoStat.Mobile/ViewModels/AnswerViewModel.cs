@@ -7,6 +7,7 @@ using System.Linq;
 using Prism.Navigation;
 using SensoStat.Mobile.Services.Interfaces;
 using SensoStat.Mobile.ViewModels.Base;
+using Xamarin.Essentials;
 
 namespace SensoStat.Mobile.ViewModels
 {
@@ -29,7 +30,7 @@ namespace SensoStat.Mobile.ViewModels
 
             var questionId = parameters.GetValue<int>("questionId");
             var question = await SurveyService.GetQuestionAsync(questionId);
-            LibelleQuestion = question.Libelle;
+            LibelleQuestion = question?.Libelle;
 
             await _speechService.TextToSpeech($"{LibelleQuestion}. Pour continuer appuyez sur le bouton ou dites suivant. ");
 
@@ -64,15 +65,19 @@ namespace SensoStat.Mobile.ViewModels
         public DelegateCommand NextStepCommand { get; set; }
         private async Task OnNextStepCommand()
         {
-            var parameter = new NavigationParameters { { "content", Content } };
-            await NavigationService.NavigateAsync(Commons.Constants.ConfirmAnswerPage, parameter);
+            _speechService.SpeechRecognizer.Recognized -= RecognizeAnswer;
+            var parameters = new NavigationParameters { { "content", Content } };
+            MainThread.BeginInvokeOnMainThread(async () => await NavigationService.NavigateAsync(Commons.Constants.ConfirmAnswerPage, parameters));
         }
         #endregion
 
         #region Methods
         private void RecognizeAnswer(object sender, SpeechRecognitionEventArgs e)
         {
-            Content += e.Result.Text;
+            if (e.Result.Text.ToLower().Contains("suivant"))
+                OnNextStepCommand();
+            else
+                Content += e.Result.Text;
 
         }
         #endregion
