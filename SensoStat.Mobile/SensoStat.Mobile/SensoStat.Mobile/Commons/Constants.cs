@@ -18,8 +18,9 @@ namespace SensoStat.Mobile.Commons
         public const string AzureRegion = "francecentral";
         #endregion
 
-        #region API
+        #region BaseUrls
         public const string BaseUrlApi = "https://appsensostatapi.azurewebsites.net/";
+        public const string BaseUrlVue = "https://sensostatvue.firebaseapp.com";
         #endregion
     }
 }
