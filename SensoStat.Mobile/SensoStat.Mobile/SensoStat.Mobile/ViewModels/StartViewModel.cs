@@ -98,6 +98,7 @@ namespace SensoStat.Mobile.ViewModels
             if (survey != null)
             {
                 await _surveyService.SaveSurveyAsync(survey);
+                var zge = await _surveyService.GetSurveyInstructionsAsync(survey.Id);
                 SurveyName = survey.Name;
                 IsLinkValid = true;
             }

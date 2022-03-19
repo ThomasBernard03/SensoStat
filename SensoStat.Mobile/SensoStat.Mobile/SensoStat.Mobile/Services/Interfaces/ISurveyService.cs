@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using SensoStat.Mobile.Models;
+using SensoStat.Mobile.Models.Entities;
 
 namespace SensoStat.Mobile.Services.Interfaces
 {
@@ -19,6 +21,13 @@ namespace SensoStat.Mobile.Services.Interfaces
         /// <param name="survey">The survey which wan't to save</param>
         /// <returns>A task</returns>
 		Task SaveSurveyAsync(Survey survey);
+
+		/// <summary>
+        /// Return all instructions of one survey
+        /// </summary>
+        /// <param name="surveyId">Id of the survey</param>
+        /// <returns>A collection of all instruct</returns>
+		Task<IEnumerable<InstructionEntity>> GetSurveyInstructionsAsync(int surveyId);
 	}
 }
 

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using SensoStat.Mobile.Commons;
@@ -39,13 +41,21 @@ namespace SensoStat.Mobile.Services
 
         public async Task SaveSurveyAsync(Survey survey)
         {
-            var surveyentity = new SurveyEntity(survey);
+            _surveyRepository.Clear();
             // Save the survey in database
-            _surveyRepository.Insert(surveyentity);
+            _surveyRepository.Insert(new SurveyEntity(survey));
 
+            _instructionRepository.Clear();
             // Save each instructions
             survey.Instructions.ForEach(i => _instructionRepository.Insert(new InstructionEntity(i)));
+        }
 
+
+        public async Task<IEnumerable<InstructionEntity>> GetSurveyInstructionsAsync(int surveyId)
+        {
+            var instructions = _instructionRepository.Get().Where(i => i.SurveyId == surveyId);
+
+            return instructions;
         }
     }
 }
