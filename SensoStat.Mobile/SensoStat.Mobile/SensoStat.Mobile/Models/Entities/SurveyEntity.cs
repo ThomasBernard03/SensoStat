@@ -38,6 +38,15 @@ namespace SensoStat.Mobile.Models.Entities
 
         }
 
+        public SurveyEntity(Survey survey)
+        {
+            Id = survey.Id;
+            Name = survey.Name;
+            CreatorId = survey.CreatorId;
+            StateId = survey.StateId;
+            CreationDate = survey.CreationDate;
+        }
+
 
     }
 }

@@ -13,11 +13,13 @@ namespace SensoStat.Mobile.Services
     {
         private readonly IHttpService _httpService;
         private readonly IRepository<SurveyEntity> _surveyRepository;
+        private readonly IRepository<InstructionEntity> _instructionRepository;
 
-        public SurveyService(IHttpService httpService, IRepository<SurveyEntity> surveyRepository)
-            {
+        public SurveyService(IHttpService httpService, IRepository<SurveyEntity> surveyRepository, IRepository<InstructionEntity> instructionRepository)
+        {
             _httpService = httpService;
             _surveyRepository = surveyRepository;
+            _instructionRepository = instructionRepository;
         }
 
         public async Task<Survey> GetSurveyByTokenAsync(string token)
@@ -37,8 +39,13 @@ namespace SensoStat.Mobile.Services
 
         public async Task SaveSurveyAsync(Survey survey)
         {
-            // 1 convert 
-            //throw new NotImplementedException();
+            var surveyentity = new SurveyEntity(survey);
+            // Save the survey in database
+            _surveyRepository.Insert(surveyentity);
+
+            // Save each instructions
+            survey.Instructions.ForEach(i => _instructionRepository.Insert(new InstructionEntity(i)));
+
         }
     }
 }
