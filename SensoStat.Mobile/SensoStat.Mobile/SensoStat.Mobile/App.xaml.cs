@@ -34,9 +34,6 @@ namespace SensoStat.Mobile
             containerRegistry.RegisterForNavigation<AnswerPage, AnswerViewModel>(Constants.AnswerPage);
             containerRegistry.RegisterForNavigation<ConfirmAnswerPage, ConfirmAnswerViewModel>(Constants.ConfirmAnswerPage);
             containerRegistry.RegisterForNavigation<EndPage, EndViewModel>(Constants.EndPage);
-
-
-
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
@@ -47,31 +44,22 @@ namespace SensoStat.Mobile
             RegisterViews(containerRegistry);
         }
 
-
-
         private void RegisterServices(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterSingleton<ISpeechService, SpeechService>();
             containerRegistry.RegisterSingleton<ISurveyService, SurveyService>();
             containerRegistry.RegisterSingleton<IHttpService, HttpService>();
-
         }
 
 
 
         private void RegisterHelpers(IContainerRegistry containerRegistry)
         {
-
-
-
         }
-
-
 
         private void RegisterRepositories(IContainerRegistry containerRegistry)
         {
         }
-
 
         protected override void OnStart()
         {
