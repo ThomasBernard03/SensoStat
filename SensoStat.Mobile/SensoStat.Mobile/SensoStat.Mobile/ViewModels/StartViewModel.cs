@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Prism.Commands;
 using Prism.Navigation;
+using SensoStat.Mobile.Commons;
 using SensoStat.Mobile.Services.Interfaces;
 using SensoStat.Mobile.ViewModels.Base;
 using Xamarin.Essentials;
@@ -52,7 +53,7 @@ namespace SensoStat.Mobile.ViewModels
         public DelegateCommand CheckUserLinkCommand { get; set; }
         private async Task OnCheckUserLink()
         {
-
+            var userToken = UserLink.Replace($"{Constants.BaseUrlVue}?token=", "");
         }
         #endregion
 
