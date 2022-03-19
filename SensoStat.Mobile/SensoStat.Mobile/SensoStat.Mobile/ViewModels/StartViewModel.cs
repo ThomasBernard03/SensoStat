@@ -11,9 +11,8 @@ namespace SensoStat.Mobile.ViewModels
 {
     public class StartViewModel : BaseViewModel
     {
-        private readonly ISpeechService _speechService;
-        private readonly ISurveyService _surveyService;
 
+        #region CTOR
         public StartViewModel(INavigationService navigationService, ISpeechService speechService, ISurveyService surveyService) : base(navigationService)
         {
             StartSurveyCommand = new DelegateCommand(async () => await OnStartSurvey());
@@ -22,7 +21,9 @@ namespace SensoStat.Mobile.ViewModels
             _speechService = speechService;
             _surveyService = surveyService;
         }
+        #endregion
 
+        #region Lifecycle
         public async override void OnNavigatedTo(INavigationParameters parameters)
         {
             base.OnNavigatedTo(parameters);
@@ -40,6 +41,31 @@ namespace SensoStat.Mobile.ViewModels
                 }
             };
         }
+        #endregion
+
+        #region Privates
+        private readonly ISpeechService _speechService;
+        private readonly ISurveyService _surveyService;
+        #endregion
+
+        #region Publics
+        private string _userLink;
+        public string UserLink
+        {
+            get { return _userLink; }
+            set { SetProperty(ref _userLink, value); }
+        }
+
+
+        private bool _isLinkValid;
+        public bool IsLinkValid
+        {
+            get { return _isLinkValid; }
+            set { SetProperty(ref _isLinkValid, value); }
+        }
+        #endregion
+
+        #region Commands
 
         #region StartSurveyCommand => OnStartSurvey
         public DelegateCommand StartSurveyCommand { get; set; }
@@ -65,19 +91,10 @@ namespace SensoStat.Mobile.ViewModels
         }
         #endregion
 
-        private string _userLink;
-        public string UserLink
-        {
-            get { return _userLink; }
-            set { SetProperty(ref _userLink, value); }
-        }
+        #endregion
 
+        #region Methods
 
-        private bool _isLinkValid;
-        public bool IsLinkValid
-        {
-            get { return _isLinkValid; }
-            set { SetProperty(ref _isLinkValid, value); }
-        }
+        #endregion
     }
 }
