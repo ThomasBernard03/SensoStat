@@ -62,6 +62,7 @@ namespace SensoStat.Mobile.ViewModels
             {
                 await _speechService.SpeechRecognizer.StopContinuousRecognitionAsync();
             }
+            _speechService.SpeechRecognizer.Recognized -= RecognizeStartSurvey;
             NextPage();
         }
         #endregion
