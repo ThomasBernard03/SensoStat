@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Net.Http;
 using System.Threading.Tasks;
+using SensoStat.Mobile.Commons;
 using SensoStat.Mobile.Models;
 using SensoStat.Mobile.Repositories.Interfaces;
 using SensoStat.Mobile.Services.Interfaces;
@@ -8,20 +10,22 @@ namespace SensoStat.Mobile.Services
 {
     public class SurveyService : ISurveyService
     {
-        private readonly IRepository<Survey> _surveyRepository;
+        private readonly IHttpService _httpService;
 
-        public SurveyService(IRepository<Survey> surveyRepository)
+        public SurveyService(IHttpService httpService)
         {
-            _surveyRepository = surveyRepository;
+            _httpService = httpService;
         }
 
-        public async Task<Survey> GetSurveyById(int surveyId, string token)
+        public async Task<Survey> GetSurveyByTokenAsync(string token)
         {
             try
             {
-                return _surveyRepository.GetById(surveyId);
+                var url = $"{Constants.BaseUrlApi}{Constants.GetSurveyByTokenEndPoint}{token}";
+                var survey = await _httpService.SendHttpRequest<Survey>(url, HttpMethod.Get);
+                return survey;
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 Console.WriteLine(ex);
                 return null;

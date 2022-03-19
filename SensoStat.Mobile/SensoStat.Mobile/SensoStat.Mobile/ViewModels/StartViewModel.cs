@@ -12,13 +12,15 @@ namespace SensoStat.Mobile.ViewModels
     public class StartViewModel : BaseViewModel
     {
         private readonly ISpeechService _speechService;
+        private readonly ISurveyService _surveyService;
 
-        public StartViewModel(INavigationService navigationService, ISpeechService speechService) : base(navigationService)
+        public StartViewModel(INavigationService navigationService, ISpeechService speechService, ISurveyService surveyService) : base(navigationService)
         {
             StartSurveyCommand = new DelegateCommand(async () => await OnStartSurvey());
             CheckUserLinkCommand = new DelegateCommand(async () => await OnCheckUserLink());
 
             _speechService = speechService;
+            _surveyService = surveyService;
         }
 
         public async override void OnNavigatedTo(INavigationParameters parameters)
@@ -54,6 +56,12 @@ namespace SensoStat.Mobile.ViewModels
         private async Task OnCheckUserLink()
         {
             var userToken = UserLink.Replace($"{Constants.BaseUrlVue}?token=", "");
+            var survey = await _surveyService.GetSurveyByTokenAsync(userToken);
+
+            if (survey == null)
+            {
+                IsLinkValid = true;
+            }
         }
         #endregion
 

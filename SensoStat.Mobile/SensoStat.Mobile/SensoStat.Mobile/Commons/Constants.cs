@@ -22,5 +22,9 @@ namespace SensoStat.Mobile.Commons
         public const string BaseUrlApi = "https://appsensostatapi.azurewebsites.net/";
         public const string BaseUrlVue = "https://sensostatvue.firebaseapp.com";
         #endregion
+
+        #region ApiEndPoints
+        public const string GetSurveyByTokenEndPoint = "Survey/Token?token=";
+        #endregion
     }
 }
