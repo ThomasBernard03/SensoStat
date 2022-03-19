@@ -48,7 +48,7 @@ namespace SensoStat.Mobile.ViewModels.Base
             else
             {
                 var parameters = new NavigationParameters() { { "questionId", nextQuestion.Id } };
-                MainThread.BeginInvokeOnMainThread(async () => { await NavigationService.NavigateAsync(Commons.Constants.AnswerPage); });
+                MainThread.BeginInvokeOnMainThread(async () => { await NavigationService.NavigateAsync(Commons.Constants.AnswerPage, parameters); });
             }
         }
 

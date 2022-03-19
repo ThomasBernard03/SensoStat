@@ -12,7 +12,7 @@
         <StackLayout VerticalOptions="CenterAndExpand">
             <Label
                 HorizontalTextAlignment="Center"
-                Text="Enoncer votre réponse puis quand vous avez fini dites suivant pour continuer"
+                Text="{Binding LibelleQuestion}"
                 FontSize="Subtitle"
                 Margin="20">
             </Label>
