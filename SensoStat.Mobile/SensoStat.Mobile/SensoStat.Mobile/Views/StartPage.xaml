@@ -26,14 +26,26 @@
             Text="Vérifier">
         </Button>
 
+
+
+
+
+
         <ActivityIndicator
             IsRunning="True"
             IsVisible="{Binding IsBusy}">
         </ActivityIndicator>
 
+        <Label
+            Text="{Binding SurveyName}"
+            FontSize="Subtitle"
+            TextColor="{StaticResource Orange}"
+            HorizontalOptions="Center"
+            />
+
         <StackLayout VerticalOptions="EndAndExpand">
             <Button
-                IsEnabled="{Binding IsLinkValid}"
+                IsEnabled="False"
                 Style="{StaticResource OrangeRoundedButton}"
                 Command="{Binding StartSurveyCommand}"
                 Text="Commencer la séance">

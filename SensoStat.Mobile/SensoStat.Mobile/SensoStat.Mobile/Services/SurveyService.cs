@@ -31,5 +31,10 @@ namespace SensoStat.Mobile.Services
                 return null;
             }
         }
+
+        public Task SaveSurveyAsync(Survey survey)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

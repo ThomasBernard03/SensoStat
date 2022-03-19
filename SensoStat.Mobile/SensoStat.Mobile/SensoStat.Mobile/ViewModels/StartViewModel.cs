@@ -63,6 +63,13 @@ namespace SensoStat.Mobile.ViewModels
             get { return _isLinkValid; }
             set { SetProperty(ref _isLinkValid, value); }
         }
+
+        private string _surveyName;
+        public string SurveyName
+        {
+            get { return _surveyName; }
+            set { SetProperty(ref _surveyName, value); }
+        }
         #endregion
 
         #region Commands
@@ -71,6 +78,13 @@ namespace SensoStat.Mobile.ViewModels
         public DelegateCommand StartSurveyCommand { get; set; }
         private async Task OnStartSurvey()
         {
+            // If the user don't enter a correct url
+            if (!IsLinkValid)
+            {
+                await App.Current.MainPage.DisplayAlert("Erreur", "Saisissez votre lien", "Ok");
+                return;
+            }
+
             await _speechService.StopTextToSpeech();
             //await _speechService.SpeechRecognizer?.StopContinuousRecognitionAsync();
             MainThread.BeginInvokeOnMainThread(async () => { var temp = await NavigationService.NavigateAsync(Commons.Constants.InstructionPage); });
@@ -81,11 +95,13 @@ namespace SensoStat.Mobile.ViewModels
         public DelegateCommand CheckUserLinkCommand { get; set; }
         private async Task OnCheckUserLink()
         {
+            // Remove the base url from the url
             var userToken = UserLink.Replace($"{Constants.BaseUrlVue}?token=", "");
             var survey = await _surveyService.GetSurveyByTokenAsync(userToken);
 
-            if (survey == null)
+            if (survey != null)
             {
+                SurveyName = survey.Name;
                 IsLinkValid = true;
             }
         }
