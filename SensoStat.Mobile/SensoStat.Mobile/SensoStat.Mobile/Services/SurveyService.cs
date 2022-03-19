@@ -92,5 +92,10 @@ namespace SensoStat.Mobile.Services
         {
             return _instructionRepository.GetById(instructionId);
         }
+
+        public Task<QuestionEntity> GetQuestionAsync(int questionId)
+        {
+            return _questionRepository.GetById(questionId);
+        }
     } 
 }

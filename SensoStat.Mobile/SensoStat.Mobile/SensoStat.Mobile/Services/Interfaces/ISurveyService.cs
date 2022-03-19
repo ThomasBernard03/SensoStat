@@ -44,6 +44,8 @@ namespace SensoStat.Mobile.Services.Interfaces
 		Task<IEnumerable<ProductEntity>> GetSurveyProductsAsync(int surveyId);
 
 		Task<InstructionEntity> GetInstructionAsync(int instructionId);
+
+		Task<QuestionEntity> GetQuestionAsync(int questionId);
 	}
 }
 
