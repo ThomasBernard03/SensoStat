@@ -15,7 +15,7 @@ namespace SensoStat.Mobile.ViewModels
 
         private readonly ISpeechService _speechService;
 
-        public InstructionViewModel(INavigationService navigationService, ISpeechService speechService) : base(navigationService)
+        public InstructionViewModel(INavigationService navigationService, ISpeechService speechService, ISurveyService surveyService) : base(navigationService, surveyService)
         {
             _speechService = speechService;
 

@@ -26,8 +26,15 @@ namespace SensoStat.Mobile.Services.Interfaces
         /// Return all instructions of one survey
         /// </summary>
         /// <param name="surveyId">Id of the survey</param>
-        /// <returns>A collection of all instruct</returns>
+        /// <returns>A collection of all instructions</returns>
 		Task<IEnumerable<InstructionEntity>> GetSurveyInstructionsAsync(int surveyId);
+
+		/// <summary>
+		/// Return all questions of one survey
+		/// </summary>
+		/// <param name="surveyId">Id of the survey</param>
+		/// <returns>A collection of all questions</returns>
+		Task<IEnumerable<QuestionEntity>> GetSurveyQuestionsAsync(int surveyId);
 	}
 }
 

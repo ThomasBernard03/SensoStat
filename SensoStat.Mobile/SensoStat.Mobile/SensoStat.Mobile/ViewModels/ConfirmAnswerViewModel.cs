@@ -13,7 +13,7 @@ namespace SensoStat.Mobile.ViewModels
     {
         private readonly ISpeechService _speechService;
         public string UserAnswer { get; set; }
-        public ConfirmAnswerViewModel(INavigationService navigationService,ISpeechService speechService) : base(navigationService)
+        public ConfirmAnswerViewModel(INavigationService navigationService, ISpeechService speechService, ISurveyService surveyService) : base(navigationService, surveyService)
         {
             BackCommand = new DelegateCommand(async () => await OnBackCommand());
             ValidateCommand = new DelegateCommand(async () => await OnValidateCommand());

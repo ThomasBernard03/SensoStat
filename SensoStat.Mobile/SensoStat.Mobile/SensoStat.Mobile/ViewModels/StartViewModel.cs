@@ -13,13 +13,12 @@ namespace SensoStat.Mobile.ViewModels
     {
 
         #region CTOR
-        public StartViewModel(INavigationService navigationService, ISpeechService speechService, ISurveyService surveyService) : base(navigationService)
+        public StartViewModel(INavigationService navigationService, ISpeechService speechService, ISurveyService surveyService) : base(navigationService, surveyService)
         {
             StartSurveyCommand = new DelegateCommand(async () => await OnStartSurvey());
             CheckUserLinkCommand = new DelegateCommand(async () => await OnCheckUserLink());
 
             _speechService = speechService;
-            _surveyService = surveyService;
         }
         #endregion
 
@@ -40,7 +39,6 @@ namespace SensoStat.Mobile.ViewModels
 
         #region Privates
         private readonly ISpeechService _speechService;
-        private readonly ISurveyService _surveyService;
         #endregion
 
         #region Publics
@@ -83,7 +81,7 @@ namespace SensoStat.Mobile.ViewModels
 
             _speechService.SpeechRecognizer.Recognized -= RecognizeStartSurvey;
             await _speechService.StopTextToSpeech();
-            MainThread.BeginInvokeOnMainThread(async () => { await NavigationService.NavigateAsync(Commons.Constants.InstructionPage); });
+            await NextPage();
         }
         #endregion
 
@@ -93,12 +91,13 @@ namespace SensoStat.Mobile.ViewModels
         {
             // Remove the base url from the url
             var userToken = UserLink?.Replace($"{Constants.BaseUrlVue}?token=", "");
-            var survey = await _surveyService.GetSurveyByTokenAsync(userToken);
+            var survey = await SurveyService.GetSurveyByTokenAsync(userToken);
 
             if (survey != null)
             {
-                await _surveyService.SaveSurveyAsync(survey);
-                var zge = await _surveyService.GetSurveyInstructionsAsync(survey.Id);
+                App.UserToken = userToken; // Save the user token
+                App.SurveyId = survey.Id; // Save the current survey
+                await SurveyService.SaveSurveyAsync(survey);
                 SurveyName = survey.Name;
                 IsLinkValid = true;
             }

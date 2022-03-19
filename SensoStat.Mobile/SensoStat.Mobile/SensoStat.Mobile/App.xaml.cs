@@ -17,6 +17,10 @@ namespace SensoStat.Mobile
 {
     public partial class App
     {
+        public static string UserToken { get; set; }
+        public static int CurrentPosition { get; set; }
+        public static int SurveyId { get; set; }
+
         public App(IPlatformInitializer initializer):base(initializer)
         {
         }

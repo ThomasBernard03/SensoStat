@@ -14,7 +14,7 @@ namespace SensoStat.Mobile.ViewModels
     {
         private readonly ISpeechService _speechService;
 
-        public AnswerViewModel(INavigationService navigationService, ISpeechService speechService) : base(navigationService)
+        public AnswerViewModel(INavigationService navigationService, ISpeechService speechService, ISurveyService surveyService) : base(navigationService, surveyService)
         {
             NextStepCommand = new DelegateCommand(async () => await OnNextStepCommand());
 

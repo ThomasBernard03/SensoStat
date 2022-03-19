@@ -16,12 +16,20 @@ namespace SensoStat.Mobile.Services
         private readonly IHttpService _httpService;
         private readonly IRepository<SurveyEntity> _surveyRepository;
         private readonly IRepository<InstructionEntity> _instructionRepository;
+        private readonly IRepository<QuestionEntity> _questionRepository;
+        private readonly IRepository<ProductEntity> _productRepository;
 
-        public SurveyService(IHttpService httpService, IRepository<SurveyEntity> surveyRepository, IRepository<InstructionEntity> instructionRepository)
+        public SurveyService(IHttpService httpService,
+            IRepository<SurveyEntity> surveyRepository,
+            IRepository<InstructionEntity> instructionRepository,
+            IRepository<QuestionEntity> questionRepository,
+            IRepository<ProductEntity> productRepository)
         {
             _httpService = httpService;
             _surveyRepository = surveyRepository;
             _instructionRepository = instructionRepository;
+            _questionRepository = questionRepository;
+            _productRepository = productRepository;
         }
 
         public async Task<Survey> GetSurveyByTokenAsync(string token)
@@ -41,13 +49,21 @@ namespace SensoStat.Mobile.Services
 
         public async Task SaveSurveyAsync(Survey survey)
         {
-            _surveyRepository.Clear();
             // Save the survey in database
+            _surveyRepository.Clear();
             _surveyRepository.Insert(new SurveyEntity(survey));
 
-            _instructionRepository.Clear();
             // Save each instructions
+            _instructionRepository.Clear();
             survey.Instructions.ForEach(i => _instructionRepository.Insert(new InstructionEntity(i)));
+
+            // Save each questions
+            _questionRepository.Clear();
+            survey.Questions.ForEach(q => _questionRepository.Insert(new QuestionEntity(q)));
+
+            // Save each products
+            _productRepository.Clear();
+            survey.Products.ForEach(p => _productRepository.Insert(new ProductEntity(p)));
         }
 
 
@@ -57,5 +73,12 @@ namespace SensoStat.Mobile.Services
 
             return instructions;
         }
-    }
+
+        public async Task<IEnumerable<QuestionEntity>> GetSurveyQuestionsAsync(int surveyId)
+        {
+            var questions = _questionRepository.Get().Where(q => q.SurveyId == surveyId);
+
+            return questions;
+        }
+    } 
 }
