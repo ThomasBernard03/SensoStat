@@ -80,5 +80,17 @@ namespace SensoStat.Mobile.Services
 
             return questions;
         }
+
+        public async Task<IEnumerable<ProductEntity>> GetSurveyProductsAsync(int surveyId)
+        {
+            var products = _productRepository.Get().Where(p => p.SurveyId == surveyId);
+
+            return products;
+        }
+
+        public async Task<InstructionEntity> GetInstructionAsync(int instructionId)
+        {
+            return _instructionRepository.GetById(instructionId);
+        }
     } 
 }
