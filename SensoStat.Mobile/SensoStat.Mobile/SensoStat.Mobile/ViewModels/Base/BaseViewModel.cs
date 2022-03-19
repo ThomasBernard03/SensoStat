@@ -2,9 +2,9 @@
 using Prism.Mvvm;
 using Prism.Navigation;
 using SensoStat.Mobile.Services.Interfaces;
-using System;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
+using System.Linq;
 
 namespace SensoStat.Mobile.ViewModels.Base
 {
@@ -29,12 +29,27 @@ namespace SensoStat.Mobile.ViewModels.Base
 
         public async Task NextPage()
         {
+            App.CurrentPosition++;
             var currentPosition = App.CurrentPosition;
 
             var questions = await SurveyService.GetSurveyQuestionsAsync(App.SurveyId);
             var instructions = await SurveyService.GetSurveyInstructionsAsync(App.SurveyId);
+            var products = await SurveyService.GetSurveyProductsAsync(App.SurveyId);
 
-            MainThread.BeginInvokeOnMainThread(async () => { await NavigationService.NavigateAsync(Commons.Constants.InstructionPage); });
+            var nextQuestion = questions.FirstOrDefault(q => q.Position == App.CurrentPosition);
+            var nextInstruction = instructions.FirstOrDefault(i => i.Position == App.CurrentPosition);
+
+            // If the next element is not a question
+            if (nextQuestion == null)
+            {
+                var parameters = new NavigationParameters() { { "instructionId", nextInstruction.Id } };
+                MainThread.BeginInvokeOnMainThread(async () => await NavigationService.NavigateAsync(Commons.Constants.InstructionPage, parameters));
+            }
+            else
+            {
+                var parameters = new NavigationParameters() { { "questionId", nextQuestion.Id } };
+                MainThread.BeginInvokeOnMainThread(async () => { await NavigationService.NavigateAsync(Commons.Constants.AnswerPage); });
+            }
         }
 
 
