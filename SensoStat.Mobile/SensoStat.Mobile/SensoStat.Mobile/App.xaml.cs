@@ -9,6 +9,9 @@ using Xamarin.Forms.Xaml;
 using SensoStat.Mobile.ViewModels;
 using SensoStat.Mobile.Services.Interfaces;
 using SensoStat.Mobile.Services;
+using SensoStat.Mobile.Repositories.Interfaces;
+using SensoStat.Mobile.Repositories;
+using SensoStat.Mobile.Models;
 
 namespace SensoStat.Mobile
 {
@@ -59,6 +62,8 @@ namespace SensoStat.Mobile
 
         private void RegisterRepositories(IContainerRegistry containerRegistry)
         {
+            containerRegistry.RegisterSingleton<IDatabase, SqliteConnectionService>();
+            containerRegistry.Register(typeof(IRepository<>), typeof(Repository<>));
         }
 
         protected override void OnStart()

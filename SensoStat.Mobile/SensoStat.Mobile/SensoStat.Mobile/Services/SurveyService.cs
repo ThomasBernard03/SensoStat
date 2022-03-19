@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using SensoStat.Mobile.Commons;
 using SensoStat.Mobile.Models;
+using SensoStat.Mobile.Models.Entities;
 using SensoStat.Mobile.Repositories.Interfaces;
 using SensoStat.Mobile.Services.Interfaces;
 
@@ -11,10 +12,12 @@ namespace SensoStat.Mobile.Services
     public class SurveyService : ISurveyService
     {
         private readonly IHttpService _httpService;
+        private readonly IRepository<SurveyEntity> _surveyRepository;
 
-        public SurveyService(IHttpService httpService)
-        {
+        public SurveyService(IHttpService httpService, IRepository<SurveyEntity> surveyRepository)
+            {
             _httpService = httpService;
+            _surveyRepository = surveyRepository;
         }
 
         public async Task<Survey> GetSurveyByTokenAsync(string token)
@@ -32,9 +35,10 @@ namespace SensoStat.Mobile.Services
             }
         }
 
-        public Task SaveSurveyAsync(Survey survey)
+        public async Task SaveSurveyAsync(Survey survey)
         {
-            throw new NotImplementedException();
+            // 1 convert 
+            //throw new NotImplementedException();
         }
     }
 }

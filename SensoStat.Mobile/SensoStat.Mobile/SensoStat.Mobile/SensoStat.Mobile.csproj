@@ -28,11 +28,13 @@
     <Folder Include="Services\Interfaces\" />
     <Folder Include="Repositories\Interfaces\" />
     <Folder Include="Helpers\Interfaces\" />
+    <Folder Include="Models\Entities\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Services\Interfaces\" />
     <None Remove="Repositories\Interfaces\" />
     <None Remove="Helpers\Interfaces\" />
     <None Remove="Microsoft.CognitiveServices.Speech" />
+    <None Remove="Models\Entities\" />
   </ItemGroup>
 </Project>

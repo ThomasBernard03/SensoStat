@@ -33,14 +33,9 @@ namespace SensoStat.Mobile.ViewModels
             await _speechService.SpeechToText();
             IsBusy = true;
 
-            _speechService.SpeechRecognizer.Recognized += async (object sender, Microsoft.CognitiveServices.Speech.SpeechRecognitionEventArgs e) =>
-            {
-                if (e.Result.Text.ToLower().Contains("commencer") && IsLinkValid)
-                {
-                    await OnStartSurvey();
-                }
-            };
+            _speechService.SpeechRecognizer.Recognized += RecognizeStartSurvey;
         }
+
         #endregion
 
         #region Privates
@@ -81,13 +76,14 @@ namespace SensoStat.Mobile.ViewModels
             // If the user don't enter a correct url
             if (!IsLinkValid)
             {
-                await App.Current.MainPage.DisplayAlert("Erreur", "Saisissez votre lien", "Ok");
+                MainThread.BeginInvokeOnMainThread(async () => {
+                await App.Current.MainPage.DisplayAlert("Erreur", "Saisissez votre lien", "Ok");});
                 return;
             }
 
+            _speechService.SpeechRecognizer.Recognized -= RecognizeStartSurvey;
             await _speechService.StopTextToSpeech();
-            //await _speechService.SpeechRecognizer?.StopContinuousRecognitionAsync();
-            MainThread.BeginInvokeOnMainThread(async () => { var temp = await NavigationService.NavigateAsync(Commons.Constants.InstructionPage); });
+            MainThread.BeginInvokeOnMainThread(async () => { await NavigationService.NavigateAsync(Commons.Constants.InstructionPage); });
         }
         #endregion
 
@@ -96,11 +92,12 @@ namespace SensoStat.Mobile.ViewModels
         private async Task OnCheckUserLink()
         {
             // Remove the base url from the url
-            var userToken = UserLink.Replace($"{Constants.BaseUrlVue}?token=", "");
+            var userToken = UserLink?.Replace($"{Constants.BaseUrlVue}?token=", "");
             var survey = await _surveyService.GetSurveyByTokenAsync(userToken);
 
             if (survey != null)
             {
+                await _surveyService.SaveSurveyAsync(survey);
                 SurveyName = survey.Name;
                 IsLinkValid = true;
             }
@@ -110,6 +107,12 @@ namespace SensoStat.Mobile.ViewModels
         #endregion
 
         #region Methods
+
+        private void RecognizeStartSurvey(object sender, Microsoft.CognitiveServices.Speech.SpeechRecognitionEventArgs e)
+        {
+            if (e.Result.Text.ToLower().Contains("commencer"))
+                OnStartSurvey();
+        }
 
         #endregion
     }
