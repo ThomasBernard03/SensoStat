@@ -97,5 +97,10 @@ namespace SensoStat.Mobile.Services
         {
             return _questionRepository.GetById(questionId);
         }
+
+        public async Task PostAnswerAsync(AnswerEntity answer, string userToken)
+        {
+            throw new NotImplementedException();
+        }
     } 
 }

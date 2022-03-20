@@ -30,14 +30,14 @@ namespace SensoStat.Mobile.Services.Interfaces
 		Task<IEnumerable<InstructionEntity>> GetSurveyInstructionsAsync(int surveyId);
 
 		/// <summary>
-		/// Return all questions of one survey
+		/// Return all questions of one survey in database
 		/// </summary>
 		/// <param name="surveyId">Id of the survey</param>
 		/// <returns>A collection of all questions</returns>
 		Task<IEnumerable<QuestionEntity>> GetSurveyQuestionsAsync(int surveyId);
 
 		/// <summary>
-        /// Return all products of one survey
+        /// Return all products of one survey in database
         /// </summary>
         /// <param name="surveyId">Id of the survey</param>
         /// <returns>A collection of all products</returns>
@@ -46,6 +46,14 @@ namespace SensoStat.Mobile.Services.Interfaces
 		Task<InstructionEntity> GetInstructionAsync(int instructionId);
 
 		Task<QuestionEntity> GetQuestionAsync(int questionId);
+
+		/// <summary>
+        /// Post a answer in the api
+        /// </summary>
+        /// <param name="answer">The answer to post</param>
+        /// <param name="userToken">The user token</param>
+        /// <returns>A task</returns>
+		Task PostAnswerAsync(AnswerEntity answer, string userToken);
 	}
 }
 

@@ -25,10 +25,10 @@ namespace SensoStat.Mobile.ViewModels
         {
             base.OnNavigatedTo(parameters);
 
-            await _speechService.TextToSpeech($"Relisez votre réponse. Pour la reformuler dites reformuler. Pour passer à l'étape suivante dites suivant");
-
-
             Content = parameters.GetValue<string>("content");
+            _questionId = parameters.GetValue<int>("questionId");
+
+            await _speechService.TextToSpeech($"Relisez votre réponse. Pour la reformuler dites reformuler. Pour confirmer votre réponse dites Valider");
         }
 
         public async override void OnNavigatedFrom(INavigationParameters parameters)
@@ -42,6 +42,7 @@ namespace SensoStat.Mobile.ViewModels
 
         #region Privates
         private readonly ISpeechService _speechService;
+        private int _questionId;
         #endregion
 
         #region Publics
@@ -72,6 +73,8 @@ namespace SensoStat.Mobile.ViewModels
             {
                 await _speechService.SpeechRecognizer.StopContinuousRecognitionAsync();
             }
+
+            // HERE SEND RESULT TO API
             await NavigationService.NavigateAsync(Commons.Constants.EndPage);
         }
         #endregion
@@ -79,14 +82,6 @@ namespace SensoStat.Mobile.ViewModels
         #region Methods
 
         #endregion
-
-
-
-
-
-
-
-
     }
 }
 
