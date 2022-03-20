@@ -25,7 +25,6 @@ namespace SensoStat.Mobile.ViewModels
         {
             base.OnNavigatedTo(parameters);
 
-
             var instructionId = parameters.GetValue<int>("instructionId");
             var instruction = await SurveyService.GetInstructionAsync(instructionId);
             LibelleInstruction = instruction.Libelle;

@@ -28,9 +28,11 @@ namespace SensoStat.Mobile.ViewModels
         {
             base.OnNavigatedTo(parameters);
 
-            var questionId = parameters.GetValue<int>("questionId");
-            var question = await SurveyService.GetQuestionAsync(questionId);
-            LibelleQuestion = question?.Libelle;
+            if (parameters.TryGetValue("questionId", out _questionId))
+            {
+                var question = await SurveyService.GetQuestionAsync(_questionId);
+                LibelleQuestion = question?.Libelle;
+            }
 
             await _speechService.TextToSpeech($"{LibelleQuestion}. Pour continuer appuyez sur le bouton ou dites suivant. ");
 
@@ -42,7 +44,10 @@ namespace SensoStat.Mobile.ViewModels
         #endregion
 
         #region Privates
+
         private readonly ISpeechService _speechService;
+        private int _questionId;
+
         #endregion
 
         #region Publics
@@ -66,6 +71,7 @@ namespace SensoStat.Mobile.ViewModels
         private async Task OnNextStepCommand()
         {
             _speechService.SpeechRecognizer.Recognized -= RecognizeAnswer;
+            await _speechService.StopTextToSpeech();
             var parameters = new NavigationParameters { { "content", Content } };
             MainThread.BeginInvokeOnMainThread(async () => await NavigationService.NavigateAsync(Commons.Constants.ConfirmAnswerPage, parameters));
         }

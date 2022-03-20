@@ -30,6 +30,14 @@ namespace SensoStat.Mobile.ViewModels
 
             Content = parameters.GetValue<string>("content");
         }
+
+        public async override void OnNavigatedFrom(INavigationParameters parameters)
+        {
+            base.OnNavigatedFrom(parameters);
+
+            await _speechService.StopTextToSpeech();
+        }
+
         #endregion
 
         #region Privates
