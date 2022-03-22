@@ -27,6 +27,25 @@ namespace SensoStat.Mobile.ViewModels.Base
             SurveyService = surveyService;
         }
 
+        public async Task<bool> VerifyProduct()
+        {
+            App.CurrentProduct++;
+            var products = await SurveyService.GetSurveyProductsAsync(App.SurveyId);
+            var endPage = await SurveyService.GetSurveyInstructionsAsync(App.SurveyId);
+            var endPageId = endPage.ToList().FirstOrDefault(s => s.Status == 2);
+            if (App.CurrentProduct < products.Count())
+            {
+                App.CurrentPosition = 0;
+                return true;
+            }
+            else
+            {
+                var parameters = new NavigationParameters() { { "endPageId", endPageId } };
+                MainThread.BeginInvokeOnMainThread(async () => await NavigationService.NavigateAsync(Commons.Constants.EndPage, parameters));
+                return false;
+            }
+        }
+
         public async Task NextPage()
         {
             App.CurrentPosition++;
@@ -34,10 +53,13 @@ namespace SensoStat.Mobile.ViewModels.Base
 
             var questions = await SurveyService.GetSurveyQuestionsAsync(App.SurveyId);
             var instructions = await SurveyService.GetSurveyInstructionsAsync(App.SurveyId);
-            var products = await SurveyService.GetSurveyProductsAsync(App.SurveyId);
+            var orderedInstructionsByDescending = instructions.OrderByDescending(i => i.Position).ToList();
+            var survey = await SurveyService.GetSurveyByTokenAsync(App.UserToken);
+
+            App.UserProduct = survey.UserProducts.OrderBy(up => up.Position).FirstOrDefault(up => up.Position == App.CurrentProduct);
 
             var nextQuestion = questions.FirstOrDefault(q => q.Position == App.CurrentPosition);
-            var nextInstruction = instructions.FirstOrDefault(i => i.Position == App.CurrentPosition);
+            var nextInstruction = orderedInstructionsByDescending.FirstOrDefault(i => i.Position == App.CurrentPosition);
 
             // If the next element is not a question
             if (nextQuestion == null)
@@ -50,6 +72,18 @@ namespace SensoStat.Mobile.ViewModels.Base
                 var parameters = new NavigationParameters() { { "questionId", nextQuestion.Id } };
                 MainThread.BeginInvokeOnMainThread(async () => { await NavigationService.NavigateAsync(Commons.Constants.AnswerPage, parameters); });
             }
+
+            if (App.CurrentPosition == orderedInstructionsByDescending[0].Position)
+            {
+                var navigate = await VerifyProduct();
+                if (navigate)
+                {
+                    orderedInstructionsByDescending.RemoveAll(instruction => instruction.Position == 0);
+                    NextPage();
+                }
+            }
+
+
         }
 
 

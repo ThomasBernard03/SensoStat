@@ -20,6 +20,8 @@ namespace SensoStat.Mobile
         public static string UserToken { get; set; }
         public static int CurrentPosition { get; set; }
         public static int SurveyId { get; set; }
+        public static int CurrentProduct { get; set; }
+        public static UserProduct UserProduct { get; set; }
 
         public App(IPlatformInitializer initializer):base(initializer)
         {
@@ -28,7 +30,7 @@ namespace SensoStat.Mobile
         protected override async void OnInitialized()
         {
             InitializeComponent();
-
+            CurrentProduct = 0;
             await NavigationService.NavigateAsync($"{Constants.StartPage}");
         }
 

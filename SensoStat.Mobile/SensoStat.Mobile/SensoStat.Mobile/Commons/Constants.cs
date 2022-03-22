@@ -20,7 +20,7 @@ namespace SensoStat.Mobile.Commons
 
         #region BaseUrls
         public const string BaseUrlApi = "https://appsensostatapi.azurewebsites.net/";
-        public const string BaseUrlVue = "https://sensostatvue.firebaseapp.com";
+        public const string BaseUrlVue = "https://sensostatvue.firebaseapp.com/";
         #endregion
 
         #region ApiEndPoints

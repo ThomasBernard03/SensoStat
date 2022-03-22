@@ -75,7 +75,8 @@ namespace SensoStat.Mobile.ViewModels
             }
 
             // HERE SEND RESULT TO API
-            await NavigationService.NavigateAsync(Commons.Constants.EndPage);
+            NextPage();
+            //await NavigationService.NavigateAsync(Commons.Constants.EndPage);
         }
         #endregion
 
