@@ -57,6 +57,7 @@ namespace SensoStat.Mobile.ViewModels.Base
             var survey = await SurveyService.GetSurveyByTokenAsync(App.UserToken);
 
             App.UserProduct = survey.UserProducts.OrderBy(up => up.Position).FirstOrDefault(up => up.Position == App.CurrentProduct);
+            App.Product = App.UserProduct.Product;
 
             var nextQuestion = questions.FirstOrDefault(q => q.Position == App.CurrentPosition);
             var nextInstruction = orderedInstructionsByDescending.FirstOrDefault(i => i.Position == App.CurrentPosition);
@@ -79,7 +80,7 @@ namespace SensoStat.Mobile.ViewModels.Base
                 if (navigate)
                 {
                     orderedInstructionsByDescending.RemoveAll(instruction => instruction.Position == 0);
-                    NextPage();
+                    await NextPage();
                 }
             }
 

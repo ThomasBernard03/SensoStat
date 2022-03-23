@@ -1,5 +1,4 @@
-﻿using System;
-using SQLite;
+﻿using SQLite;
 
 namespace SensoStat.Mobile.Models
 {
@@ -15,5 +14,8 @@ namespace SensoStat.Mobile.Models
         public Question Question { get; set; }
 
         public string UserAnswer { get; set; }
+
+        public int ProductId { get; set; }
+        public Product Product { get; set; }
     }
 }

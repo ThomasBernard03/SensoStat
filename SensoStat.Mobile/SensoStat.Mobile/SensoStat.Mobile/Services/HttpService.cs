@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Net.Http.Json;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using SensoStat.Mobile.Services.Interfaces;
@@ -21,8 +22,9 @@ namespace SensoStat.Mobile.Services
 
                 var httpRequestMessage = new HttpRequestMessage() { Method = httpMethod, RequestUri = new Uri(url) };
 
-                //if (body != null)
-                //    httpRequestMessage.Content = JsonConvert.Create(body);
+                if (body != null)                
+                    httpRequestMessage.Content = JsonContent.Create(body);
+
 
                 var response = httpClient.SendAsync(httpRequestMessage);
 

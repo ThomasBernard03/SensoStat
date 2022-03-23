@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.CognitiveServices.Speech;
 
 namespace SensoStat.Mobile.Services.Interfaces

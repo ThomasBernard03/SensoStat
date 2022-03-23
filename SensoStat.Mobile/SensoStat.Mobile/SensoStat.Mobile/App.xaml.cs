@@ -2,16 +2,15 @@
 using Prism.Ioc;
 using SensoStat.Mobile.Commons;
 using SensoStat.Mobile.Views;
-using Prism.Navigation;
-using System;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 using SensoStat.Mobile.ViewModels;
 using SensoStat.Mobile.Services.Interfaces;
 using SensoStat.Mobile.Services;
 using SensoStat.Mobile.Repositories.Interfaces;
 using SensoStat.Mobile.Repositories;
 using SensoStat.Mobile.Models;
+using SensoStat.Mobile.Helpers.Interfaces;
+using SensoStat.Mobile.Helpers;
 
 namespace SensoStat.Mobile
 {
@@ -22,6 +21,7 @@ namespace SensoStat.Mobile
         public static int SurveyId { get; set; }
         public static int CurrentProduct { get; set; }
         public static UserProduct UserProduct { get; set; }
+        public static Product Product { get; set; }
 
         public App(IPlatformInitializer initializer):base(initializer)
         {
@@ -58,12 +58,14 @@ namespace SensoStat.Mobile
             containerRegistry.RegisterSingleton<ISpeechService, SpeechService>();
             containerRegistry.RegisterSingleton<ISurveyService, SurveyService>();
             containerRegistry.RegisterSingleton<IHttpService, HttpService>();
+            containerRegistry.RegisterSingleton<IAnswerService, AnswerService>();
         }
 
 
 
         private void RegisterHelpers(IContainerRegistry containerRegistry)
         {
+            containerRegistry.RegisterSingleton<IDataTransferHelper, DataTransferHelper>();
         }
 
         private void RegisterRepositories(IContainerRegistry containerRegistry)

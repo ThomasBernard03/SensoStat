@@ -1,11 +1,9 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.CognitiveServices.Speech;
 using Prism.Commands;
 using Prism.Navigation;
 using SensoStat.Mobile.Services.Interfaces;
 using SensoStat.Mobile.ViewModels.Base;
-using Xamarin.Essentials;
 
 namespace SensoStat.Mobile.ViewModels
 {

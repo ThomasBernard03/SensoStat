@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Prism.Commands;
 using Prism.Navigation;
 using SensoStat.Mobile.Commons;

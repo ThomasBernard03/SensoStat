@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace SensoStat.Mobile.Commons
+﻿namespace SensoStat.Mobile.Commons
 {
     public class Constants
     {

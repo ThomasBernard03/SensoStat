@@ -1,5 +1,4 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using SensoStat.Mobile.Models.Interfaces;
 using SQLite;
 

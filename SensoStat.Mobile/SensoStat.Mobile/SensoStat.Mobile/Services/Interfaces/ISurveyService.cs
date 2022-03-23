@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using SensoStat.Mobile.Models;
 using SensoStat.Mobile.Models.Entities;

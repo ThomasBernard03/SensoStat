@@ -1,9 +1,6 @@
-﻿using System;
-using System.Threading.Tasks;
-using Microsoft.CognitiveServices.Speech;
+﻿using System.Threading.Tasks;
 using Prism.Commands;
 using Prism.Navigation;
-using Prism.Navigation.Xaml;
 using SensoStat.Mobile.Services.Interfaces;
 using SensoStat.Mobile.ViewModels.Base;
 
@@ -12,11 +9,12 @@ namespace SensoStat.Mobile.ViewModels
     public class ConfirmAnswerViewModel : BaseViewModel
     {
         #region CTOR
-        public ConfirmAnswerViewModel(INavigationService navigationService, ISpeechService speechService, ISurveyService surveyService) : base(navigationService, surveyService)
+        public ConfirmAnswerViewModel(INavigationService navigationService, ISpeechService speechService, ISurveyService surveyService,IAnswerService answerService) : base(navigationService, surveyService)
         {
             BackCommand = new DelegateCommand(async () => await OnBackCommand());
             ValidateCommand = new DelegateCommand(async () => await OnValidateCommand());
             _speechService = speechService;
+            _answerService = answerService;
         }
         #endregion
 
@@ -43,6 +41,7 @@ namespace SensoStat.Mobile.ViewModels
         #region Privates
         private readonly ISpeechService _speechService;
         private int _questionId;
+        private readonly IAnswerService _answerService;
         #endregion
 
         #region Publics
@@ -75,8 +74,11 @@ namespace SensoStat.Mobile.ViewModels
             }
 
             // HERE SEND RESULT TO API
-            NextPage();
-            //await NavigationService.NavigateAsync(Commons.Constants.EndPage);
+
+            await _answerService.SendAnswer(_content, _questionId);
+
+            // HERE THE NEXT PAGE
+            await NextPage();
         }
         #endregion
 

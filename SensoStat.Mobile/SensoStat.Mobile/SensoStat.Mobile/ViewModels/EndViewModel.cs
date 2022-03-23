@@ -1,5 +1,4 @@
-﻿using System;
-using Prism.Navigation;
+﻿using Prism.Navigation;
 using SensoStat.Mobile.Services.Interfaces;
 using SensoStat.Mobile.ViewModels.Base;
 
