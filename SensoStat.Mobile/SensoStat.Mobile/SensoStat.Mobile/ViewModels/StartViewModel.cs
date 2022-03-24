@@ -17,7 +17,7 @@ namespace SensoStat.Mobile.ViewModels
             StartSurveyCommand = new DelegateCommand(async () => await OnStartSurvey());
             CheckUserLinkCommand = new DelegateCommand(async () => await OnCheckUserLink());
 
-            UserLink = "https://sensostatvue.firebaseapp.com/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IlMwMDExNyIsInByaW1hcnlzaWQiOiIxNyIsImp0aSI6ImE4NGFjNGY4LTQ2MGUtNDZjMi05Y2I3LWEzZjg4NGNmMDY0NCIsIm5iZiI6MTY0Nzk1MzMxMiwiZXhwIjoxNjQ4NTU4MTEyLCJpYXQiOjE2NDc5NTMzMTIsImlzcyI6Imh0dHBzOi8vbG9jYWxob3N0OjcwMTkiLCJhdWQiOiJTZW5zb1N0YXRXZWIuQXBpIn0.fWkJdbBQsEElkVveP5D7i-uZ0HRcfAb4NzOc1WpXIvs";
+            UserLink = "https://sensostatvue.firebaseapp.com/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IlMwMDEyMyIsInByaW1hcnlzaWQiOiIyMyIsImp0aSI6IjJhY2Y1YzYyLTUzN2MtNDgzYy04M2Q2LTkwMGY4MDIwNmJlMCIsIm5iZiI6MTY0ODEyNzgxMSwiZXhwIjoxNjQ4NzMyNjExLCJpYXQiOjE2NDgxMjc4MTEsImlzcyI6Imh0dHBzOi8vbG9jYWxob3N0OjcwMTkiLCJhdWQiOiJTZW5zb1N0YXRXZWIuQXBpIn0.vLb2MQhn41Y08MGjuU7bPLhDsA4S5vFjwKzowqxWFzM";
 
             _speechService = speechService;
         }

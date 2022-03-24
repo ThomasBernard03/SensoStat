@@ -25,7 +25,8 @@ namespace SensoStat.Mobile.ViewModels
 
             var instructionId = parameters.GetValue<int>("instructionId");
             var instruction = await SurveyService.GetInstructionAsync(instructionId);
-            LibelleInstruction = instruction.Libelle + " pour le produit n°" + App.UserProduct.Product.Code;
+            LibelleInstruction = instruction.Libelle + "pour le produit ";
+            ProductCode = App.Product.Code;
 
 
             await _speechService.TextToSpeech($"{LibelleInstruction}. Pour continuer appuyez sur le bouton ou dites suivant. ");
@@ -48,8 +49,15 @@ namespace SensoStat.Mobile.ViewModels
             get { return _libelleInstruction; }
             set { SetProperty(ref _libelleInstruction, value); }
         }
+
+        private string _productCode;
+        public string ProductCode
+        {
+            get { return _productCode; }
+            set { SetProperty(ref _productCode, value); }
+        }
         #endregion
-        
+
         #region Commands
         public DelegateCommand NextStepCommand { get; set; }
         private async Task OnNextStepCommand()
