@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 namespace SensoStat.Mobile.Views
 {
@@ -9,6 +7,11 @@ namespace SensoStat.Mobile.Views
         public InstructionPage()
         {
             InitializeComponent();
+        }
+
+        protected override bool OnBackButtonPressed()
+        {
+            return true;
         }
     }
 }

@@ -18,5 +18,10 @@
             <Setter Property="CornerRadius" Value="15"></Setter>
             <Setter Property="Text" Value="Valider"></Setter>
         </Style>
+
+        <Style x:Key="TextOrangeRoundedButton" TargetType="Button" BasedOn="{StaticResource OrangeRoundedButton}">
+            <Setter Property="BackgroundColor" Value="Transparent"></Setter>
+            <Setter Property="TextColor" Value="{StaticResource Orange}"></Setter>
+        </Style>
     </Application.Resources>
 </prism:PrismApplication>

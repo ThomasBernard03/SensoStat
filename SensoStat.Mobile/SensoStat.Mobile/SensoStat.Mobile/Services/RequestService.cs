@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading.Tasks;
-using SensoStat.Mobile.Commons;
 using SensoStat.Mobile.Helpers.Interfaces;
 using SensoStat.Mobile.Services.Interfaces;
 
