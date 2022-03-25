@@ -8,12 +8,20 @@ namespace SensoStat.Mobile.Services
 {
     public class AnswerService : IAnswerService
     {
+        #region Privates
         private readonly IHttpService _httpService;
+
+        #endregion
+
+        #region CTOR
         public AnswerService(IHttpService httpService)
         {
             _httpService = httpService;
         }
 
+        #endregion
+
+        #region Methodes
         public async Task<AnswerEntity> SendAnswer(string content, int questionId)
         {
             try
@@ -37,5 +45,8 @@ namespace SensoStat.Mobile.Services
                 return null;
             }
         }
+
+
+        #endregion
     }
 }

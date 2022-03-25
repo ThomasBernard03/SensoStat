@@ -8,15 +8,21 @@ namespace SensoStat.Mobile.Services
 {
     public class SpeechService : ISpeechService
     {
+        #region Privates
         private readonly IMicrophoneService _microphoneService;
+        private readonly SpeechConfig _speechConfig;
+        private readonly SourceLanguageConfig _sourceLanguageConfig;
+        private readonly AudioConfig _audioConfig;
 
+        #endregion
+
+        #region Publics
         public SpeechRecognizer SpeechRecognizer { get; set; }
         public SpeechSynthesizer SpeechSynthesizer { get; set; }
 
-        private SpeechConfig _speechConfig;
-        private SourceLanguageConfig _sourceLanguageConfig;
-        private AudioConfig _audioConfig;
+        #endregion
 
+        #region CTOR
         public SpeechService(IMicrophoneService microphoneService)
         {
             _microphoneService = microphoneService;
@@ -27,6 +33,9 @@ namespace SensoStat.Mobile.Services
             _audioConfig = AudioConfig.FromDefaultSpeakerOutput();
         }
 
+        #endregion
+
+        #region Methodes
         public async Task SpeechToText()
         {
             try
@@ -57,5 +66,7 @@ namespace SensoStat.Mobile.Services
         {
             await SpeechSynthesizer.StopSpeakingAsync();
         }
+
+        #endregion
     }
 }

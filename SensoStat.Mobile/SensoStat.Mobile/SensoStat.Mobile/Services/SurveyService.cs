@@ -13,12 +13,17 @@ namespace SensoStat.Mobile.Services
 {
     public class SurveyService : ISurveyService
     {
+
+        #region Privates
         private readonly IHttpService _httpService;
         private readonly IRepository<SurveyEntity> _surveyRepository;
         private readonly IRepository<InstructionEntity> _instructionRepository;
         private readonly IRepository<QuestionEntity> _questionRepository;
         private readonly IRepository<ProductEntity> _productRepository;
 
+        #endregion
+
+        #region CTOR
         public SurveyService(IHttpService httpService,
             IRepository<SurveyEntity> surveyRepository,
             IRepository<InstructionEntity> instructionRepository,
@@ -32,6 +37,9 @@ namespace SensoStat.Mobile.Services
             _productRepository = productRepository;
         }
 
+        #endregion
+
+        #region Methodes
         public async Task<Survey> GetSurveyByTokenAsync(string token)
         {
             try
@@ -102,5 +110,7 @@ namespace SensoStat.Mobile.Services
         {
             throw new NotImplementedException();
         }
-    } 
+
+        #endregion
+    }
 }
