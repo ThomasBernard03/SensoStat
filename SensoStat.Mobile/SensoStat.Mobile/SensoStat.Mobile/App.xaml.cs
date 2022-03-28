@@ -11,6 +11,7 @@ using SensoStat.Mobile.Repositories;
 using SensoStat.Mobile.Models;
 using SensoStat.Mobile.Helpers.Interfaces;
 using SensoStat.Mobile.Helpers;
+using SensoStat.Mobile.Models.Entities;
 
 namespace SensoStat.Mobile
 {
@@ -20,8 +21,7 @@ namespace SensoStat.Mobile
         public static int CurrentPosition { get; set; }
         public static int SurveyId { get; set; }
         public static int CurrentProduct { get; set; }
-        public static UserProduct UserProduct { get; set; }
-        public static Product Product { get; set; }
+        public static ProductEntity Product { get; set; }
 
         public App(IPlatformInitializer initializer):base(initializer)
         {

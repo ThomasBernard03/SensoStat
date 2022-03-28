@@ -5,6 +5,7 @@ using SensoStat.Mobile.Services.Interfaces;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 using System.Linq;
+using SensoStat.Mobile.Models;
 
 namespace SensoStat.Mobile.ViewModels.Base
 {
@@ -53,11 +54,11 @@ namespace SensoStat.Mobile.ViewModels.Base
 
             var questions = await SurveyService.GetSurveyQuestionsAsync(App.SurveyId);
             var instructions = await SurveyService.GetSurveyInstructionsAsync(App.SurveyId);
+            var products = await SurveyService.GetSurveyProductsAsync(App.SurveyId);
             var orderedInstructionsByDescending = instructions.OrderByDescending(i => i.Position).ToList();
             var survey = await SurveyService.GetSurveyByTokenAsync(App.UserToken);
 
-            App.UserProduct = survey.UserProducts.OrderBy(up => up.Position).FirstOrDefault(up => up.Position == App.CurrentProduct);
-            App.Product = App.UserProduct.Product;
+            App.Product = products.ToList()[App.CurrentProduct];
 
             var nextQuestion = questions.FirstOrDefault(q => q.Position == App.CurrentPosition);
             var nextInstruction = orderedInstructionsByDescending.FirstOrDefault(i => i.Position == App.CurrentPosition);
