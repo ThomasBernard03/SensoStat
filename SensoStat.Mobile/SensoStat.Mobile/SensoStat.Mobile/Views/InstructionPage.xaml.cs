@@ -8,10 +8,5 @@ namespace SensoStat.Mobile.Views
         {
             InitializeComponent();
         }
-
-        protected override bool OnBackButtonPressed()
-        {
-            return true;
-        }
     }
 }

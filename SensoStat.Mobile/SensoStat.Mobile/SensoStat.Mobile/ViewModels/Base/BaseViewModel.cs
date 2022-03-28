@@ -41,7 +41,7 @@ namespace SensoStat.Mobile.ViewModels.Base
             else
             {
                 var parameters = new NavigationParameters() { { "endPageId", endPageId } };
-                MainThread.BeginInvokeOnMainThread(async () => await NavigationService.NavigateAsync(Commons.Constants.EndPage, parameters));
+                MainThread.BeginInvokeOnMainThread(async () => await NavigationService.NavigateAsync($"/{Commons.Constants.EndPage}", parameters));
                 return false;
             }
         }
@@ -66,12 +66,12 @@ namespace SensoStat.Mobile.ViewModels.Base
             if (nextQuestion == null)
             {
                 var parameters = new NavigationParameters() { { "instructionId", nextInstruction.Id } };
-                MainThread.BeginInvokeOnMainThread(async () => await NavigationService.NavigateAsync(Commons.Constants.InstructionPage, parameters));
+                MainThread.BeginInvokeOnMainThread(async () => await NavigationService.NavigateAsync($"/{Commons.Constants.InstructionPage}", parameters));
             }
             else
             {
                 var parameters = new NavigationParameters() { { "questionId", nextQuestion.Id } };
-                MainThread.BeginInvokeOnMainThread(async () => { await NavigationService.NavigateAsync(Commons.Constants.AnswerPage, parameters); });
+                MainThread.BeginInvokeOnMainThread(async () => { await NavigationService.NavigateAsync($"/{Commons.Constants.AnswerPage}", parameters); });
             }
 
             if (App.CurrentPosition == orderedInstructionsByDescending[0].Position)

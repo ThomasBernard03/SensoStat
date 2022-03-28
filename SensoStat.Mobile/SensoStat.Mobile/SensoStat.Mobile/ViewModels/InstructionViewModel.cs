@@ -29,7 +29,7 @@ namespace SensoStat.Mobile.ViewModels
             ProductCode = App.Product.Code;
 
 
-            await _speechService.TextToSpeech($"{LibelleInstruction}. Pour continuer appuyez sur le bouton ou dites suivant. ");
+            await _speechService.TextToSpeech($"{LibelleInstruction}{ProductCode}. Pour continuer appuyez sur le bouton ou dites suivant. ");
 
             await _speechService.SpeechToText();
             IsBusy = true;
