@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.CognitiveServices.Speech;
 
 namespace SensoStat.Mobile.Services.Interfaces
@@ -21,5 +20,7 @@ namespace SensoStat.Mobile.Services.Interfaces
         /// <param name="content">The content which we want to read</param>
         /// <returns></returns>
         Task TextToSpeech(string content);
+
+        Task StopTextToSpeech();
     }
 }

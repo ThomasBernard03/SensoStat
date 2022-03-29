@@ -9,5 +9,19 @@
         <Color x:Key="White">#FFFFFF</Color>
         <Color x:Key="Black">#000000</Color>
         <Color x:Key="Purple">#B007FF</Color>
+
+        <Style x:Key="OrangeRoundedButton" TargetType="Button">
+            <Setter Property="BackgroundColor" Value="{StaticResource Orange}"></Setter>
+            <Setter Property="TextColor" Value="{StaticResource White}"></Setter>
+            <Setter Property="FontAttributes" Value="Bold"></Setter>
+            <Setter Property="Padding" Value="15"></Setter>
+            <Setter Property="CornerRadius" Value="15"></Setter>
+            <Setter Property="Text" Value="Valider"></Setter>
+        </Style>
+
+        <Style x:Key="TextOrangeRoundedButton" TargetType="Button" BasedOn="{StaticResource OrangeRoundedButton}">
+            <Setter Property="BackgroundColor" Value="Transparent"></Setter>
+            <Setter Property="TextColor" Value="{StaticResource Orange}"></Setter>
+        </Style>
     </Application.Resources>
 </prism:PrismApplication>

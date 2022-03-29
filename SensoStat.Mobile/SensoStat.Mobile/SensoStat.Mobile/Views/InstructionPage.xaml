@@ -2,7 +2,15 @@
 <ContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converters="clr-namespace:SensoStat.Mobile.Converters"
     x:Class="SensoStat.Mobile.Views.InstructionPage">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:TextToColorConverter x:Key="TextToColorConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
     <StackLayout
         Padding="20, 50"
         HorizontalOptions="FillAndExpand"
@@ -14,7 +22,8 @@
                 Margin="20, 20"
                 HorizontalOptions="Center"
                 HorizontalTextAlignment="Center"
-                Text="Vous allez désormais tester le produit"
+                Text="{Binding LibelleInstruction}"
+                TextColor="{Binding LibelleInstruction,Converter={StaticResource TextToColorConverter}}"
                 FontSize="Subtitle">
             </Label>
             <Label
@@ -32,12 +41,8 @@
         <StackLayout VerticalOptions="EndAndExpand">
             <Button
                 Command="{Binding NextStepCommand}"
-                BackgroundColor="{StaticResource Orange}"
-                Text="Etape suivante"
-                TextColor="{StaticResource White}"
-                CornerRadius="15"
-                FontAttributes="Bold"
-                Padding="15">
+                Style="{StaticResource OrangeRoundedButton}"
+                Text="Etape suivante">
             </Button>
             <Label
                 Text="Ou dites 'Suivant'"

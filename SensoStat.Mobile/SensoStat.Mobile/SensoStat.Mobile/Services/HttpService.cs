@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Net.Http.Json;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using SensoStat.Mobile.Services.Interfaces;
 
 namespace SensoStat.Mobile.Services
@@ -10,28 +12,29 @@ namespace SensoStat.Mobile.Services
     {
         public async Task<T> SendHttpRequest<T>(string url, HttpMethod httpMethod, object body = null, string bearer = null)
         {
-            //try
-            //{
-            //    var httpClient = new HttpClient();
+            try
+            {
+                var httpClient = new HttpClient();
 
-            //    // For OAuth2.0
-            //    if (!string.IsNullOrEmpty(bearer))
-            //        httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", bearer);
+                // For OAuth2.0
+                if (!string.IsNullOrEmpty(bearer))
+                    httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", bearer);
 
-            //    var httpRequestMessage = new HttpRequestMessage() { Method = httpMethod, RequestUri = new Uri(url) };
+                var httpRequestMessage = new HttpRequestMessage() { Method = httpMethod, RequestUri = new Uri(url) };
 
-            //    if (body != null)
-            //        httpRequestMessage.Content = JsonConvert.Create(body);
+                if (body != null)                
+                    httpRequestMessage.Content = JsonContent.Create(body);
 
-            //    var response = httpClient.SendAsync(httpRequestMessage);
 
-            //    if (response.Result.IsSuccessStatusCode)
-            //        return JsonConvert.DeserializeObject<T>(await response.Result.Content.ReadAsStringAsync());
-            //}
-            //catch (Exception ex)
-            //{
-            //    Console.WriteLine(ex);
-            //}
+                var response = httpClient.SendAsync(httpRequestMessage);
+
+                if (response.Result.IsSuccessStatusCode)
+                    return JsonConvert.DeserializeObject<T>(await response.Result.Content.ReadAsStringAsync());
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
 
             return default(T);
         }

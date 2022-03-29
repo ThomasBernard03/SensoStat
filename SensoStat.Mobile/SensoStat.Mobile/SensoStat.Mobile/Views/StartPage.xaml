@@ -16,20 +16,39 @@
             FontSize="Title">
         </Label>
 
+        <Entry
+            Placeholder="Entrez votre lien"
+            Text="{Binding UserLink}">
+        </Entry>
+        <Button
+            Style="{StaticResource TextOrangeRoundedButton}"
+            Command="{Binding CheckUserLinkCommand}"
+            Text="Vérifier">
+        </Button>
+
+
+
+
+
+
         <ActivityIndicator
             IsRunning="True"
             IsVisible="{Binding IsBusy}">
         </ActivityIndicator>
 
+        <Label
+            Text="{Binding SurveyName}"
+            FontSize="Subtitle"
+            TextColor="{StaticResource Orange}"
+            HorizontalOptions="Center"
+            />
+
         <StackLayout VerticalOptions="EndAndExpand">
             <Button
+                IsEnabled="False"
+                Style="{StaticResource OrangeRoundedButton}"
                 Command="{Binding StartSurveyCommand}"
-                BackgroundColor="{StaticResource Orange}"
-                Text="Commencer la séance"
-                TextColor="{StaticResource White}"
-                CornerRadius="15"
-                FontAttributes="Bold"
-                Padding="15">
+                Text="Commencer la séance">
             </Button>
             <Label
                 Text="Ou dites 'Commencer'"
