@@ -67,18 +67,22 @@ namespace SensoStat.Mobile.ViewModels
         public DelegateCommand NextStepCommand { get; set; }
         private async Task OnNextStepCommand()
         {
+            await _speechService.SpeechSynthesizer.StopSpeakingAsync();
+            if (IsBusy)
+            {
+                await _speechService.SpeechRecognizer.StopContinuousRecognitionAsync();
+            }
             _speechService.SpeechRecognizer.Recognized -= RecognizeAnswer;
-            await _speechService.StopTextToSpeech();
             var parameters = new NavigationParameters { { "content", Content }, { "questionId", _questionId } };
             MainThread.BeginInvokeOnMainThread(async () => await NavigationService.NavigateAsync($"/{Commons.Constants.ConfirmAnswerPage}", parameters));
         }
         #endregion
 
         #region Methods
-        private void RecognizeAnswer(object sender, SpeechRecognitionEventArgs e)
+        private async void RecognizeAnswer(object sender, SpeechRecognitionEventArgs e)
         {
             if (e.Result.Text.ToLower().Contains("suivant"))
-                OnNextStepCommand();
+                await OnNextStepCommand();
             else
                 Content += e.Result.Text;
 
