@@ -25,7 +25,7 @@ namespace SensoStat.Mobile.ViewModels
 
             var instructionId = parameters.GetValue<int>("instructionId");
             var instruction = await SurveyService.GetInstructionAsync(instructionId);
-            LibelleInstruction = instruction.Libelle + "pour le produit ";
+            LibelleInstruction = instruction.Libelle;
             ProductCode = App.Product.Code;
 
 
