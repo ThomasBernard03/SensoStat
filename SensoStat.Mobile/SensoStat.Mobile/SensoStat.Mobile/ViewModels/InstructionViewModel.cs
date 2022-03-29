@@ -25,7 +25,7 @@ namespace SensoStat.Mobile.ViewModels
 
             var instructionId = parameters.GetValue<int>("instructionId");
             var instruction = await SurveyService.GetInstructionAsync(instructionId);
-            LibelleInstruction = instruction.Libelle + "pour le produit ";
+            LibelleInstruction = instruction.Libelle;
             ProductCode = App.Product.Code;
 
 
@@ -68,15 +68,15 @@ namespace SensoStat.Mobile.ViewModels
                 await _speechService.SpeechRecognizer.StopContinuousRecognitionAsync();
             }
             _speechService.SpeechRecognizer.Recognized -= RecognizeStartSurvey;
-            NextPage();
+            await NextPage();
         }
         #endregion
 
         #region Methods
-        private void RecognizeStartSurvey(object sender, SpeechRecognitionEventArgs e)
+        private async void RecognizeStartSurvey(object sender, SpeechRecognitionEventArgs e)
         {
             if (e.Result.Text.ToLower().Contains("suivant"))
-                OnNextStepCommand();
+                await OnNextStepCommand();
         }
         #endregion
     }

@@ -63,18 +63,6 @@ namespace SensoStat.Mobile.ViewModels.Base
             var nextQuestion = questions.FirstOrDefault(q => q.Position == App.CurrentPosition);
             var nextInstruction = orderedInstructionsByDescending.FirstOrDefault(i => i.Position == App.CurrentPosition);
 
-            // If the next element is not a question
-            if (nextQuestion == null)
-            {
-                var parameters = new NavigationParameters() { { "instructionId", nextInstruction.Id } };
-                MainThread.BeginInvokeOnMainThread(async () => await NavigationService.NavigateAsync($"/{Commons.Constants.InstructionPage}", parameters));
-            }
-            else
-            {
-                var parameters = new NavigationParameters() { { "questionId", nextQuestion.Id } };
-                MainThread.BeginInvokeOnMainThread(async () => { await NavigationService.NavigateAsync($"/{Commons.Constants.AnswerPage}", parameters); });
-            }
-
             if (App.CurrentPosition == orderedInstructionsByDescending[0].Position)
             {
                 var navigate = await VerifyProduct();
@@ -84,6 +72,20 @@ namespace SensoStat.Mobile.ViewModels.Base
                     await NextPage();
                 }
             }
+            else
+            {
+                // If the next element is not a question
+                if (nextQuestion == null)
+                {
+                    var parameters = new NavigationParameters() { { "instructionId", nextInstruction.Id } };
+                    MainThread.BeginInvokeOnMainThread(async () => await NavigationService.NavigateAsync($"/{Commons.Constants.InstructionPage}", parameters));
+                }
+                else
+                {
+                    var parameters = new NavigationParameters() { { "questionId", nextQuestion.Id } };
+                    MainThread.BeginInvokeOnMainThread(async () => { await NavigationService.NavigateAsync($"/{Commons.Constants.AnswerPage}", parameters); });
+                }
+            }          
 
 
         }

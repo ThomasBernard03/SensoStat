@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Microsoft.CognitiveServices.Speech;
 using Prism.Commands;
 using Prism.Navigation;
 using SensoStat.Mobile.Services.Interfaces;
@@ -27,6 +28,9 @@ namespace SensoStat.Mobile.ViewModels
             _questionId = parameters.GetValue<int>("questionId");
 
             await _speechService.TextToSpeech($"Relisez votre réponse. Pour la reformuler dites reformuler. Pour confirmer votre réponse dites Valider");
+            await _speechService.SpeechToText();
+            IsBusy = true;
+            _speechService.SpeechRecognizer.Recognized += RecognizeConfirmation;
         }
 
         public async override void OnNavigatedFrom(INavigationParameters parameters)
@@ -72,7 +76,7 @@ namespace SensoStat.Mobile.ViewModels
             {
                 await _speechService.SpeechRecognizer.StopContinuousRecognitionAsync();
             }
-
+            _speechService.SpeechRecognizer.Recognized -= RecognizeConfirmation;
             // HERE SEND RESULT TO API
 
             await _answerService.SendAnswer(_content, _questionId);
@@ -83,7 +87,13 @@ namespace SensoStat.Mobile.ViewModels
         #endregion
 
         #region Methods
-
+        private async void RecognizeConfirmation(object sender, SpeechRecognitionEventArgs e)
+        {
+            if (e.Result.Text.ToLower().Contains("valider"))
+                await OnValidateCommand();
+            else if(e.Result.Text.ToLower().Contains("reformuler"))
+                await OnBackCommand();
+        }
         #endregion
     }
 }

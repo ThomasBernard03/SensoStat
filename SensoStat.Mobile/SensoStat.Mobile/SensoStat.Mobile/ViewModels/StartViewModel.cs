@@ -17,7 +17,7 @@ namespace SensoStat.Mobile.ViewModels
             StartSurveyCommand = new DelegateCommand(async () => await OnStartSurvey());
             CheckUserLinkCommand = new DelegateCommand(async () => await OnCheckUserLink());
 
-            UserLink = "https://sensostatvue.firebaseapp.com/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IlMwMDEyMyIsInByaW1hcnlzaWQiOiIyMyIsImp0aSI6IjJhY2Y1YzYyLTUzN2MtNDgzYy04M2Q2LTkwMGY4MDIwNmJlMCIsIm5iZiI6MTY0ODEyNzgxMSwiZXhwIjoxNjQ4NzMyNjExLCJpYXQiOjE2NDgxMjc4MTEsImlzcyI6Imh0dHBzOi8vbG9jYWxob3N0OjcwMTkiLCJhdWQiOiJTZW5zb1N0YXRXZWIuQXBpIn0.vLb2MQhn41Y08MGjuU7bPLhDsA4S5vFjwKzowqxWFzM";
+            UserLink = "https://sensostatvue.firebaseapp.com/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IlMwMDI2IiwicHJpbWFyeXNpZCI6IjYiLCJqdGkiOiIxMTFlMTNkNi0yYzhkLTQ4YzgtODM5Ni1kNjljYmNmYmVjNDgiLCJuYmYiOjE2NDg1MzczNTIsImV4cCI6MTY0OTE0MjE1MiwiaWF0IjoxNjQ4NTM3MzUyLCJpc3MiOiJodHRwczovL2xvY2FsaG9zdDo3MDE5IiwiYXVkIjoiU2Vuc29TdGF0V2ViLkFwaSJ9.NXOyaV7LOWYmZQeIt72XOpJJDmGie0h_F6bOVaZLD6M";
 
             _speechService = speechService;
         }
@@ -113,10 +113,10 @@ namespace SensoStat.Mobile.ViewModels
 
         #region Methods
 
-        private void RecognizeStartSurvey(object sender, Microsoft.CognitiveServices.Speech.SpeechRecognitionEventArgs e)
+        private async void RecognizeStartSurvey(object sender, Microsoft.CognitiveServices.Speech.SpeechRecognitionEventArgs e)
         {
             if (e.Result.Text.ToLower().Contains("commencer"))
-                OnStartSurvey();
+                await OnStartSurvey();
         }
 
         #endregion
