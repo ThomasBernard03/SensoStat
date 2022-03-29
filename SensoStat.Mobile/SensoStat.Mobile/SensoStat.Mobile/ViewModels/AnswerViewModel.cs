@@ -74,7 +74,7 @@ namespace SensoStat.Mobile.ViewModels
             }
             _speechService.SpeechRecognizer.Recognized -= RecognizeAnswer;
             var parameters = new NavigationParameters { { "content", Content }, { "questionId", _questionId } };
-            MainThread.BeginInvokeOnMainThread(async () => await NavigationService.NavigateAsync($"/{Commons.Constants.ConfirmAnswerPage}", parameters));
+            MainThread.BeginInvokeOnMainThread(async () => await NavigationService.NavigateAsync($"{Commons.Constants.ConfirmAnswerPage}", parameters));
         }
         #endregion
 
